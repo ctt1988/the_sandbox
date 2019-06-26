@@ -1,5 +1,6 @@
 //snippet of code to calculate change from payment
 var makeChange = function(price, payment) {
+  console.log('running makeChange function');
 	//setting price=3.5 and payment=4 in this example
   var changeLeft = Math.round(100*payment - 100*price);
   //changeLeft is now 50
@@ -13,6 +14,7 @@ var makeChange = function(price, payment) {
     changeLeft -= quantity * val;
     results.push(quantity);
   });
+  console.log(results);
   return results;
 };
 
