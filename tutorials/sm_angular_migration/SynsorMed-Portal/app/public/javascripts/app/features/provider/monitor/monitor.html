@@ -1,0 +1,308 @@
+<div id="monitor">
+  <!-- Nav tabs -->
+  <!-- Top nav starts  -->
+  <nav class="navbar synsormed-navs navbar-inverse" role="tabs">
+    <div class="container">
+      <!-- Nav brand start -->
+      <div class="navbar-header col-md-2">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collspse-settings-target">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand">
+        <strong>Monitors</strong>
+        </a>
+      </div>
+      <!-- Nav brand ends-->
+      <!-- Nav menu start-->
+      <ul id="collspse-settings-target" role="tablist" class="nav navbar-nav collapse navbar-collapse col-md-10">
+        <li role="presentation" ng-if="user.role == 'Admin' || user.role == 'Provider'" ng-click="editMonitor()">
+          <a>New Monitor</a>
+        </li>
+        <li class="active" role="presentation" ng-if="user.role == 'Admin' || user.role == 'Provider'">
+          <a href="#worklist" aria-controls="worklist" role="tab" data-toggle="tab">List</a>
+        </li>
+      </ul>
+      <!-- Nav menu ends -->
+      <div class="alert alert-danger col-md-offset-1 col-md-3" ng-if="licenseMsg" style="padding:8px;margin:10px 0px;float:right;">
+        <strong style="padding-left: 35px;">{{licenseMsg}}</strong>
+      </div>
+    </div>
+  </nav>
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <!-- monitor list -->
+    <div role="tabpanel" class="tab-pane active monitor-list" id="monitor-list">
+      <div ng-if="!alert.msg">
+        <div class="header">
+          <div class="container monitor-filter">
+            <div class="xs-visible-block col-sm-3 col-lg-2 clearfix">
+              <h3>Monitor List</h3>
+            </div>
+            <div class="xs-visible-block col-sm-9 col-lg-10 clearfix">
+              <div class="col-md-7 col-sm-6 col-lg-5 col-xs-12 xs-visible-block clearfix xs-mar-top-10 pad-0">
+                <span class="hidden-xs hidden-sm small-text">Monitors for</span>
+                <aura-dropdown class='xs-fl pointer' selected="showUser.id" items="users" key="id" item="name"></aura-dropdown>
+                <aura-dropdown class='xs-fr pointer' selected="filter.id" items="filters" key="id" item="name"></aura-dropdown>
+                <!--<aura-dropdown class='xs-fr pointer' selected="deletedmonitor.id" items="deletedmonitors" key="id" item="name"></aura-dropdown>-->
+                <span class="hidden-xs hidden-sm small-text">Filter</span>
+              </div>
+              <div class="col-md-3 col-sm-4 col-lg-4 col-xs-12 xs-visible-block clearfix xs-mar-top-10 pad-0">
+                <div class="xs-fl col-lg-5 col-sm-4 col-xs-4 pad-0">
+                  <span>
+                    <span class="hidden-xs hidden-sm small-text">Records</span>
+                    <aura-dropdown selected="pagination.pageSize" items="pagination.pageSizes" class="pointer"></aura-dropdown>
+                    <span class="visible-xs-inline small-text">Records</span>
+                  </span>
+                </div>
+                <div class="col-lg-4 col-sm-6 col-xs-4 xs-fr pad-0">
+                  <input class='mar-left-10 form-control' type='text' placeholder="Search" ng-model='pagination.searchBox' />
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12 xs-visible-block clearfix xs-mar-top-10 pad-0">
+                <button class="btn btn-primary btn-sm" ng-click="refreshMonitorList()"><strong>REFRESH LIST</strong></button>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="container monitor-filter" ng-if="profileType">
+            <div class="xs-visible-block col-sm-9 col-lg-9 clearfix">
+                  <div class="col-md-7 col-sm-6 col-lg-4 col-xs-12 xs-visible-block clearfix xs-mar-top-10 pad-0 col-md-offset-2">
+                      <div class="col-md-3">
+                        <span class="hidden-xs hidden-sm small-text">Filter By</span>
+                      </div>
+                      <div class="col-md-8">
+                        <input class='form-control' type='text' placeholder="Filter" ng-model='pagination.filter' style="border: 1px solid #00ABA2;border-radius: 10px;"/>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-4 col-lg-5 col-xs-12 xs-visible-block clearfix xs-mar-top-10 pad-0">
+                        <div class="col-md-3">
+                          <span class="hidden-xs hidden-sm small-text">Records per Page</span>
+                        </div>
+                        <div class="col-md-4">
+                          <input class='form-control' type='text' placeholder="Page" ng-model='pagination.pageSize' style="border: 1px solid #00ABA2;border-radius: 10px;"/>
+                        </div>
+                 </div>
+            </div>
+            <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12 xs-visible-block clearfix xs-mar-top-10 pad-0">
+               <input class='mar-left-10 form-control' type='text' placeholder="Search" ng-model='pagination.searchBox' style="border: 1px solid #00ABA2;border-radius: 10px;"/>
+            </div>
+            </div> -->
+          <!--<stacked-toggle-progress ng-if="filterData.length" data="filterData" for="selectUserById(showUser.id)" total="monitors.length"></stacked-toggle-progress>-->
+        </div>
+        <div ng-if="monitors.length > 0 && initialLoaded" class="synsormed-list-table">
+          <div class="list-head-row">
+            <div class="row">
+              <div class="col-sm-1 col-xs-1"></div>
+              <div class="col-sm-1 col-xs-3">
+                <strong>Code</strong>
+              </div>
+              <div class="col-xs-3 text-center" ng-class="profileType ? 'col-sm-3' : 'col-sm-2'">
+                <strong>Patient</strong>
+              </div>
+              <div class="hidden-xs text-center" ng-class="profileType ? 'col-sm-3' : 'col-sm-2'" ng-if="profileType">
+                <strong>Care Coordinator</strong>
+              </div>
+              <div class="col-sm-2 hidden-xs text-center" ng-if="!profileType">
+                <strong>Serial Number</strong>
+              </div>
+              <div class="col-sm-4 col-xs-3 text-center" ng-if="!profileType">
+                <strong>Monitoring</strong>
+              </div>
+              <!-- <div class="col-sm-2 hidden-xs text-center"><strong>Start Date</strong></div> -->
+              <div class="col-sm-1 hidden-xs"><strong>Status</strong></div>
+              <div class="col-sm-2 col-xs-5">
+                <strong class="visible-xs">Status</strong>
+                <strong>Actions</strong>
+              </div>
+            </div>
+          </div>
+          <div class="list-head-row hover-grid" ng-repeat="monitor in pagination.finalMonitors track by $index" id="monitors">
+            <div class="row">
+              <div class="col-xs-1 col-sm-1 cell-pinged text-center">
+                <span ng-click="hideNotify(monitor); displaySummary(monitor)" tooltip-html-unsafe="Click for details" class="tooltip-auqa-bg" tooltip-placement="top" ng-if="monitor.notifyRequested">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                </span>
+              </div>
+              <div class="col-sm-1 col-xs-3">
+                <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a class="pointer"> {{monitor.patientCode}} </a>
+                </div>
+                <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenu2">
+                  <!-- <li><a href="/#/showMonitor?id={{monitor.id}}" > Instructions </a></li>
+                    <li ng-if="monitor.location"><a class="pointer" ng-click="displayLocation(monitor.patientCode, monitor.location)"> Location </a></li> -->
+                  <li>
+                    <a class="pointer" ng-click="displaySummary(monitor)"> Patient Summary </a>
+                  </li>
+                </ul>
+              </div>
+              <!--              <div class="col-sm-1 col-xs-3 text-center tooltip-auqa-bg" ng-if="profileType" tooltip-placement="top" tooltip-html-unsafe="{{showPatientInfo(monitor)}}">
+                <a  class="pointer" style="color:#F05F3A"> {{monitor.patientCode}} </a>
+                </div> -->
+              <div class="col-xs-3 text-center tooltip-auqa-bg" ng-class="profileType ? 'col-sm-3' : 'col-sm-2 '">
+                {{monitor.patientName || 'N/A'}}
+              </div>
+              <div class="hidden-xs text-center" ng-if="profileType" ng-class="profileType ? 'col-sm-3' : 'col-sm-2 '">{{monitor.providerName || 'N/A'}}</div>
+              <div class="col-sm-2 hidden-xs text-center" ng-if="!profileType">{{monitor.serialNumber || 'N/A'}}</div>
+              <div class="col-sm-4 col-xs-3 text-center" ng-if="!profileType">
+                <span ng-if="monitor.measurementName.length" ng-repeat='name in monitor.measurementName track by $index'>{{name}}
+                <i ng-if='$index!=(monitor.measurementName.length-1)'>, </i>
+                </span>
+                <span ng-if="!monitor.measurementName.length">N/A</span>
+              </div>
+              <!-- <div class="col-sm-2  hidden-xs text-center">{{ (monitor.startDate | date:'mediumDate') || 'N/A'}}</div> -->
+              <div class="col-xs-1 col-sm-1" style="position: relative; left: 15px">
+                <span ng-style="{color: monitor.surveyColor}" tooltip-html-unsafe="{{showLastSyncDates(monitor)}}" class="tooltip-auqa-bg" tooltip-placement="top">
+                  <i ng-class="{'fa fa-circle': monitor.surveyColor !== '#fff', statusBorder: monitor.surveyColor == '#fff'}" aria-hidden="true"></i>
+                </span>
+                <!-- <div ng-if="checkAlertCondition(monitor.lastSync) != true">
+                  <span ng-if="!(monitor.isMissed || monitor.isOutofBound)" class="fa fa-lg fa-check-circle text-success tooltip-auqa-bg" tooltip-placement="top" tooltip-html-unsafe="{{showLastSyncDates(monitor.lastSync)}}"></span>
+                  <span ng-if="monitor.isMissed" class="tooltip-auqa-bg fa fa-lg fa-calendar-times-o {{(monitor.bioSeverity > 3 )? 'text-danger': 'text-warning'}}" tooltip-placement="top" tooltip-html-unsafe="{{showLastSyncDates(monitor.lastSync)}}"></span>
+                  <span ng-if="monitor.isOutofBound" class="tooltip-auqa-bg fa fa-lg fa-heartbeat text-danger" tooltip-placement="top" tooltip-html-unsafe="{{showLastSyncDates(monitor.lastSync)}}"></span>
+                  <span ng-if="monitor.isEduMissed" class="tooltip-auqa-bg fa fa-lg fa-file-text {{(monitor.eduSeverity > 3 )? 'text-danger': 'text-warning'}}" tooltip-placement="top" tooltip-html-unsafe="{{showLastSyncDates(monitor.lastSync)}}"></span>
+                  </div> -->
+              </div>
+              <div class="col-sm-2 col-xs-4" ng-if="!monitor.deleted_at && !profileType">
+                <button class="btn btn-secondary btn-sm" ng-click="monitorInsightChart(monitor)">
+                <i class="fa fa-bar-chart"></i>
+                </button>
+                <button data-toggle="dropdown" class="dropdown-toggle btn btn-secondary btn-sm btn-options">
+                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                </button>
+                <ul class="dropdown-menu font-15" role="menu">
+                  <li ng-click="editMonitor(monitor)">
+                    <a class="pointer">
+                    <i class="text-center width25 text-secondary fa fa-edit"></i>
+                    <span> Edit monitor </span>
+                    </a>
+                  </li>
+                  <li ng-click="monitorOauthLink(monitor)">
+                    <a class="pointer">
+                    <i class="text-center width25 text-secondary fa fa-cloud-upload"></i>
+                    <span> Connected Services </span>
+                    </a>
+                  </li>
+                  <!-- Not applicable to this workflow 102917 aholmes
+                    <li ng-click="notifyMonitor(monitor)">
+                        <a class="pointer">
+                           <i class="text-center width25 text-secondary fa fa-bell"></i>
+                           <span> Send message </span>
+                        </a>
+                    </li>
+                    -->
+                  <li ng-click="deleteMonitor(monitor.id)">
+                    <a class="pointer">
+                    <i class="text-center width25 text-secondary fa fa-trash"></i>
+                    <span> Delete monitor </span>
+                    </a>
+                  </li>
+                  <li ng-click="displaySummary(monitor)">
+                    <a class="pointer">
+                    <i class="text-center width25 text-secondary fa fa-file-text-o"></i>
+                    <span> Notes </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-sm-3 col-xs-4" ng-if="!monitor.deleted_at && profileType">
+                <button class="btn btn-sm" ng-click="monitorInsightChart(monitor)" style="background-color:white"><i class="fa fa-bar-chart"></i></button>
+                <button data-toggle="dropdown" class="dropdown-toggle btn-options btn-sm" style="background-color:white; border:none">
+                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                </button>
+                <ul class="dropdown-menu font-15" role="menu">
+                  <li ng-click="editMonitor(monitor)">
+                    <a class="pointer">
+                      <i class="text-center width25 text-secondary fa fa-edit"></i>
+                      <span> Edit monitor </span>
+                    </a>
+                  </li>
+                  <li ng-click="monitorOauthLink(monitor)">
+                    <a class="pointer">
+                      <i class="text-center width25 text-secondary fa fa-cloud-upload"></i>
+                      <span> Connected Services </span>
+                    </a>
+                  </li>
+                  <li ng-click="displaySummary(monitor)">
+                    <a class="pointer">
+                      <i class="text-center width25 text-secondary fa fa-file-text-o"></i>
+                      <span> Notes </span>
+                    </a>
+                  </li>
+                  <li ng-click="deleteMonitor(monitor.id)">
+                    <a class="pointer">
+                      <i class="text-center width25 text-secondary fa fa-trash"></i>
+                      <span> Delete monitor </span>
+                    </a>
+                  </li>
+                </ul>
+                <br class="visible-xs" />
+                <a class="pointer" ng-if="monitor.notificationId && monitor.showNote" ng-click="displaySummary(monitor)" class="new-notes">
+                  <span style="color: #F05F3A;font-size:12px;">NEW NOTES</span>
+                </a>
+              </div>
+              <div class="col-sm-10 col-xs-6" ng-if="monitor.deleted_at">
+                <button data-toggle="dropdown" class="dropdown-toggle btn btn-secondary btn-sm btn-options">
+                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                </button>
+                <ul class="dropdown-menu font-15" role="menu">
+                  <li ng-click="resetMonitor(monitor.id)">
+                    <a class="pointer">
+                    <i class="text-center width25 text-secondary fa fa-trash"></i>
+                    <span> Reset monitor </span>
+                    </a>
+                  </li>
+                  <li ng-click="permanentDeleteMonitor(monitor.id)">
+                    <a class="pointer">
+                    <i class="text-center width25 text-secondary fa fa-trash"></i>
+                    <span>Permanent Delete monitor</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <alert ng-if="pagination.finalMonitors.length == 0" class="container no-list" type="warning">No monitors in this filter</alert>
+        </div>
+      </div>
+      <alert ng-if="!alert.msg && !monitors.length && initialLoaded" class="container no-list" type="info">There are no monitors for current provider.</alert>
+      <alert class="container no-list" ng-if="alert.msg" type="{{alert.type}}">{{alert.msg}}</alert>
+    </div>
+    <!-- monitor list ends -->
+    <!--Pagination-->
+    <div ng-if="pagination.finalMonitors.length != 0" class="container text-center">
+      <ul class="pagination" ng-if="pageCount != 1">
+        <li>
+          <span ng-click="pageTurn(-1)" ng-if="showPrevious">
+          <i class="fa fa-arrow-left"></i> Previous</span>
+        </li>
+        <li ng-repeat="aPage in pages" ng-class="{active: pagination.page == aPage}">
+          <span ng-click="pageTo(aPage)">{{aPage}}</span>
+        </li>
+        <li>
+          <span ng-click="pageTurn(1)" ng-if="showNext">Next
+          <i class="fa fa-arrow-right"></i>
+          </span>
+        </li>
+      </ul>
+    </div>
+    <div ng-if="pagination.finalMonitors.length != 0" class="container">
+      <small>Viewing page {{pagination.page}} of {{pageCount}}</small>
+    </div>
+    <!--Pagination-->
+  </div>
+  <!-- Tab panes end -->
+</div>
+<style>
+  .status-green {
+  color: green;
+  }
+  .status-red {
+  color: red;
+  }
+  .status-orange {
+  color: orange;
+  }
+  .status-white {
+  color: #d2d2d2;
+  }
+</style>

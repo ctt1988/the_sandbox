@@ -1,0 +1,48 @@
+<div id="patient-call-area" >
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="patienCall">
+            <div class="container">
+                <div class="xs-visible-block col-sm-4 col-lg-3 clearfix ">
+                    <div class="call-title">Virtual Waiting Room</div>
+                    <div class="patient-code text-center">Patient <span class="patient-code-clr">{{patientCode}}</span></div>
+                </div>
+            </div>
+
+            <div class="synsormed-list-table">
+                <div class="list-head-row">
+                    <div class="container">
+                        <div class="row margin-top-20">
+                            <div class="col-sm-4">
+                                <div class="pull-left">
+                                     <span class="font-20"> Physician status </span>
+                               </div>
+                               <div class="pull-left phy-status">
+                                 <span ng-if="isProviderOnline">
+                                     <i class="fa fa-circle online-patient" aria-hidden="true" title="Physician is online"></i>
+                                     <strong>Physician is online</strong>
+                                 </span>
+                                 <span ng-if="!isProviderOnline">
+                                     <i  class="fa fa-circle text-danger" aria-hidden="true" title="Physician is offline"></i>
+                                     <strong>Physician is offline</strong>
+                                 </span>
+                               </div>
+                                <div class="clear"> </div>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+
+               <div class="list-head-row">
+                   <div class="container">
+                       <div class="col-sm-4 instructions-wrap">
+                           <strong class="text-info">Instructions</strong>
+                           <ul type="none">
+                               <li>Please keep this window open. The medical provider will request a video session shortly</li>
+                           </ul>
+                       </div>
+                   </div>
+               </div>
+          </div>
+      </div>
+   </div>
+</div>

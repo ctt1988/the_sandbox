@@ -1,0 +1,18 @@
+[
+  {
+    "id"   : 1,
+    "name" : "hypertension"
+  },
+  {
+    "id"   : 2,
+    "name" : "diabetes"
+  },
+  {
+    "id"   : 3,
+    "name" : "obesity"
+  },
+  {
+    "id"   : 4,
+    "name" : "copd"
+  }
+]

@@ -1,0 +1,120 @@
+<div id="generateMonitor" class="modal-body" style="position: relative" wait="waiting">
+    <div class="text-center">
+      <h3 ng-if="!isNew">Link Monitor {{monitor.patientCode}}</h3>
+      <h3 ng-if="isNew">New Monitor</h3>
+    </div>
+    <div class="panel panel-default">
+          <div class="panel-body">
+              <form role="form" name="form">
+                <!-- Not applicable to this workflow 102917 aholmes
+                <div class="form-group" validate>
+                 <input required placeholder="Monitoring Details" name="description" class="form-control" type="text" ng-model="data.description">
+                </div>
+            -->
+
+                <div class="form-group" ng-if="!profileType">
+                    <h5>For Provider</h5>
+                    <!-- <select name="forUser" required class="form-control btn-secondary" ng-model="useUser.id" ng-options="user.id as user.name for user in users"></select> -->
+                    <multiple-autocomplete ng-model="data.selectedList" object-property="name" suggestions-arr="providers" name="forUser" required="true" after-select-item="afterSelectItem"></multiple-autocomplete>
+                </div>
+                <div class="form-group" ng-if="profileType">
+                    <h5>Care Coordinator</h5>
+                    <select name="forUser" required class="form-control border-secondary" ng-model="useUser.id" ng-options="user.id as user.name for user in users"></select>
+                </div>
+
+                <div class="form-group" validate>
+                    <h5 ng-if="profileType">Date Added</h5>
+                    <div class="input-group">
+                        <input name="startDate" placeholder="Start Date" type="text" class="border-secondary form-control"
+                        ng-click="datePicker.opened=true" datepicker-options="{showWeeks:false}"
+                        datepicker-popup="shortDate" ng-model="data.startDate" is-open="datePicker.opened"
+                        close-text="Close" show-button-bar="true" />
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-secondary" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" validate>
+                    <h5 class="pull-left" ng-if="!profileType">For Patient</h5>
+                    <h5 class="pull-left" ng-if="profileType">Patient Name</h5>
+                    <button title='Add Patient' type="button" class="pull-right btn btn-secondary btn-sm" ng-click="createPatient()"><i class="fa fa-plus"></i></button>
+                    <div class="clear"></div>
+                    <ui-select input-id="forPatient" ng-model="data.patientId" theme="bootstrap" title="Choose a person">
+                        <ui-select-match placeholder="Enter patient name...">{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices repeat="patient.id as patient in patients | propsFilter: {name: $select.search}">
+                            <div ng-bind-html="patient.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="form-group" validate >
+                    <input ng-model='data.notify' type='checkbox' />
+                    Send Care Alerts <help help-text="Get notified via email on any missed data submissions."/>
+                </div>
+                <div class="clear"></div>
+                <!-- This checkbox is not functional. Created for illustration purposes only. -->
+                <div class="form-group">
+                    <input type='checkbox' ng-model='data.educationChecked' />
+                    Education <help help-text="Send an health education piece to patient."/>
+                </div>
+                <div class="clear"></div>
+                <div class="form-group" validate >
+                    <input ng-model='data.medication' type='checkbox' />
+                    Medication Reminders <help help-text="Get notified on medication reminder."/>
+                </div>
+
+                <!-- <div class="form-group" validate ng-if="profileType">
+                    Set Care Alerts <help help-text="Get notified via email on any missed data submissions."/>
+                    <input name="careAlerts" placeholder="Enter patient Caregiver email address here" type="text" class="border-secondary form-control">
+                </div> -->
+
+<!--                 <div class="form-group" ng-if="data.notify && !profileType" validate>
+                    <h5>Number of Occurrences <help help-text="No. of consecutive missed data submissions before notifying"/></h5>
+                    <div range-slider min="1" max="6" model-max="data.sensitivity" pin-handle="min"></div>
+                </div>
+                <div class="form-group" ng-if="data.notify && profileType" validate>
+                    <h5>Number of Occurrences <help help-text="No. of consecutive missed data submissions before notifying"/></h5>
+                    <select name="occurences" required class="border-secondary form-control" placeholder="Enter patient Caregiver occurences here" ng-model="data.patientId" ng-options="occurence.id for occurence in occurences"></select>
+                </div> -->
+
+
+                <div class="form-group" ng-if="data.notify" validate>
+                    <h5>Reporting Emails <help help-text="The email ids where we will send notifications"/></h5>
+                    <input ng-model="data.reportingEmails" tags-input type='text' name='emails' class="form-control" placeholder="Email Details" />
+                </div>
+
+                <div class="form-group" ng-if="data.medication" validate>
+                    <select name="medicationReminder" required class="form-control btn-secondary" ng-model="data.medicationReminder" ng-options="interval.id as interval.name for interval in monitoringIntervals"></select>
+                </div>
+
+                <div class="form-group">
+                    <h5 class="pull-left">Measurements <help help-text="Choose which health indicators you want to monitor"/></h5>
+                    <button title='Add indicator' type="button" class="pull-right btn btn-secondary btn-sm" ng-click="addIndicator()"><i class="fa fa-plus"></i></button>
+                    <div class="clear"></div>
+                </div>
+                <indicator-list monitor-id='monitor.id' measurements='measurements'
+                 monitor-measurements='monitorMeasurements' diseases='diseases'
+                 leaderboard="monitor ? monitor.isLeaderboardActive : false"
+                 status-survey="statusSurvey">
+                </indicator-list>
+                <div class="clear"></div>
+
+                <!-- <div class="form-group" ng-if="profileType" validate>
+                    <h5>Default Settings <help help-text="Google Fit Pedometer"/></h5>
+                    <div class="input-group">
+                        <input name='pedometer' placeholder="Google Fit Pefdometer" type="text" class="border-secondary form-control" ng-model="data.pedometer" />
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-secondary"><i class="glyphicon glyphicon-trash"></i></button>
+                        </div>
+                    </div>
+                </div> -->
+            </form>
+            <small ng-if='!isNew'>(Next Reading date will reset if you update the indicator)</small><br />
+            <small ng-if="monitorMeasurements.length">(* Indicator not saved yet)</small>
+          </div>
+      </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">{{getStateText()}}</button>
+    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+</div>

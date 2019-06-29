@@ -1,0 +1,77 @@
+<div id="summary-report" class="modal-body" style="position: relative">
+    <div class="text-center">
+      <h3>Patient Summary</h3>
+    </div>
+    <div class="panel panel-default">
+          <div class="panel-body">
+              <div ng-if="!result"> No information found</div>
+              <div ng-if="result" id="patient-summary">
+                  <div class="list-group">
+                      <div class="row group-item hdr">
+                         <div class="col-sm-12">General</div>
+                      </div>
+                      <div class="row group-item">
+                         <div class="col-sm-6 bordr-rt"> Patient Code</div>
+                         <div class="col-sm-6"><span class="badge">{{result.code}}</span></div>
+                      </div>
+                      <div class="row group-item">
+                         <div class="col-sm-6 bordr-rt">Patient Name</div>
+                         <div class="col-sm-6">
+                             <span class="badge">{{result.patientName | defaultText : 'N/A'}}
+                             </span>
+                         </div>
+                      </div>
+                      <div class="row group-item">
+                         <div class="col-sm-6 bordr-rt">DOB</div>
+                         <div class="col-sm-6">
+                             <span class="badge">
+                                 {{result.dob | formatDob}}
+                             </span>
+                         </div>
+                      </div>
+                      <div class="row group-item">
+                         <div class="col-sm-6 bordr-rt">Organization name</div>
+                         <div class="col-sm-6">
+                             <span class="badge">
+                                 {{result.organizationName}}
+                             </span>
+                         </div>
+                      </div>
+                      <div class="row group-item">
+                         <div class="col-sm-6 bordr-rt">Provider name</div>
+                         <div class="col-sm-6">
+                             <span class="badge">
+                                 {{result.providerName}}
+                             </span>
+                         </div>
+                      </div>
+                      <div class="row group-item">
+                         <div class="col-sm-6 bordr-rt">Phone number</div>
+                         <div class="col-sm-6">
+                             <span class="badge">
+                                 {{result.patientContact | defaultText : 'N/A'}}
+                             </span>
+                         </div>
+                      </div>
+                  </div>
+                  <indicator-metrics indicators="result.indicators"></indicator-metrics>
+                  <ul class="list-group">
+                      <li class="list-group-item list-header">
+                          Notes
+                      </li>
+                      <li style="word-wrap:break-word;" class="list-group-item" ng-repeat="note in result.notes" ng-if="result.notes && result.notes.length">
+                          {{note.text}}
+                      </li>
+                      <li class="list-group-item" ng-if="!result.notes || !result.notes.length">
+                          <alert class="no-list" type="warning">None</alert>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+</div>
+<div class="modal-footer">
+    <!-- <a href="/proxy/v1/pdf" download>link</a> -->
+    <button ng-click="downloadPDF()" class="btn btn-primary">Download</button>
+    <button class="btn btn-primary" ng-click="ok()">Ok</button>
+</div>

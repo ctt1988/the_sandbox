@@ -1,0 +1,74 @@
+#survey {
+  position: relative;
+  > section {
+    @extend .absolute-fit;
+  }
+  #survey-question-container {
+    margin: auto;
+    @extend .clearfix;
+    height: 400px;
+    position: relative;
+
+    .survey-question {
+      position: absolute;
+      background-color: white;
+      padding: 1em;
+      @extend .clearfix, .absolute-fit;
+      @include vbox;
+      @include box-shadow(0 0 5px $gray);
+
+      -webkit-transition-duration: 600ms;
+      transition-duration: 600ms;
+
+      z-index: 10;
+      @for $i from 0 through 4 {
+        &:nth-child(#{$i + 1}) {
+          bottom: -10px * $i;
+          top: 10px * $i;
+          z-index: 10 - $i;
+        }
+      }
+      > div:first-child {
+        @include flex();
+        overflow-y: auto;
+        text-align:justify;
+        @media screen and (min-width:600px) {
+          font-size:3.0vw;
+       }
+      }
+      .survey-buttons {
+        div {
+          text-align: center;
+          @extend .col-xs-6;
+        }
+        button {
+          -webkit-transition-duration: 600ms;
+          transition-duration: 600ms;
+          background: transparent;
+          border: transparent;
+          i {
+            @extend .fa-3x;
+          }
+        }
+      }
+
+      &.ng-enter, &.ng-leave {
+
+//        -webkit-transform: scaleZ(0.3);
+//        transform: scaleZ(0.3);
+      }
+
+      &.ng-enter, &.ng-leave.ng-leave-active {
+        opacity:0;
+        transform: translate(0%, -40%) scale(2);
+        -webkit-transform: translate(0%, -40%) scale(2);
+      }
+
+      &.ng-leave, &.ng-enter.ng-enter-active {
+        opacity:1;
+      }
+
+    }
+  }
+
+}

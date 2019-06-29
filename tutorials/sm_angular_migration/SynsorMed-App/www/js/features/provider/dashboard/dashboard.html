@@ -1,0 +1,38 @@
+  <header>
+    <h1>Dashboard</h1>
+  </header>
+
+  <!-- Patient Details from wearable gadgets -->
+  <section id="patient-details">
+
+    <div class="row text-center">
+      <button ng-click="getPatientData();">Refresh</button>
+    </div>
+    <alert type="info" ng-if="apiNoti && apiData">
+        <h4><i class="fa fa-calendar"></i>{{apiNoti}}</h4>
+    </alert>
+    <!-- API Data container section -->
+    <div ng-if="apiData" class="panel panel-header" ng-repeat="(title,details) in apiData">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{title}}</h3>
+      </div>
+      <!-- Details section -->
+      <ul ng-if="hasChilds(details) && details" class="list-group">
+        <li class="list-group-item" ng-repeat="(subtitle,subdetail) in details">
+          <span class="badge">{{subdetail}}</span>
+          {{subtitle}}
+        </li>
+      </ul>
+      <!-- Details section Ends-->
+      <div class="panel-body" ng-if="!hasChilds(details)" >
+        {{details}}
+      </div>
+    </div>
+    <!-- API Data container section ends-->
+
+    <div ng-if="apiData == false" class="center row">
+      <h5 class="text-center col-xs-8 col-xs-offset-2 alert alert-info">No Data Available</h5>
+    </div>
+
+  </section>
+  <!-- Patient Details from wearable gadgets Ends -->

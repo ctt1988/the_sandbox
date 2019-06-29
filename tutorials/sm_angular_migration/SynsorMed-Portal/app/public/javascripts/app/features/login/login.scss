@@ -1,0 +1,33 @@
+#login{
+  padding-top:50px;
+  input:not([type=checkbox]){
+    max-width:none;
+    margin-top:10px;
+  }
+  .forgot-link{
+    margin-top:10px;
+  }
+  .emergency-link{
+     color: $secondary-color;
+     text-decoration: none !important;
+  }
+  .panel-footer{
+    background-color:$brand-secondary;
+    color:#fff;
+    a{
+      color:#fff;
+    }
+  }
+
+  .password-container {
+    position: relative;
+  }
+
+  .password-view {
+    position: absolute;
+    color: #8B8B8B;
+    cursor: pointer;
+    top: 8px;
+    right: 10px;
+  }
+}

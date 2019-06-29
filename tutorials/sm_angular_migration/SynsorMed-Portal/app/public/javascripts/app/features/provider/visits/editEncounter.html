@@ -1,0 +1,47 @@
+<div id="generateCode" class="modal-body" wait="waiting">
+    <alert ng-if="notification" type="danger">{{notification}}</alert>
+    <div class="text-center">
+      <h3 ng-if="!isNew">Edit Encounter {{encounter.patientCode}}</h3>
+      <h3 ng-if="isNew">Schedule Visit</h3>
+    </div>
+    <div class="panel panel-default">
+          <div class="panel-body">
+              <form role="form" name="form">
+                <div class="form-group" validate>
+                 <input required placeholder="Reason for visit" name="reasonForVisit" class="form-control" type="text" ng-model="data.reasonForVisit">
+                </div>
+
+                <div class="input-group" validate>
+                   <input required name="followUpDate" type="text" class="border-secondary form-control" ng-focus="opened=true" datepicker-options="{showWeeks:false}" datepicker-popup="shortDate" ng-model="data.followupDate" is-open="opened" min-date="minDate" max-date="maxDate"  ng-required="true" close-text="Close"  />
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-secondary" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </div>
+                </div>
+
+                <div class="form-group" validate>
+                    <h5>Followup Time</h5>
+                    <timepicker class="timepicker" ng-model="data.followupTime"></timepicker>
+                </div>
+                <div class="form-group" validate>
+                    <h5>Worklist for</h5>
+                    <select name="forUser" required class="form-control btn-secondary" ng-model="useUser.id" ng-options="user.id as user.name for user in users"></select>
+                </div>
+                <div class="form-group" validate>
+                    <h5 class="pull-left">Patient for</h5>
+                    <button title='Add Patient' type="button" class="pull-right btn btn-secondary btn-sm" ng-click="createPatient()"><i class="fa fa-plus"></i></button>
+                    <select name="forUser" class="form-control btn-secondary" ng-model="data.patientId" ng-options="patient.id as patient.name for patient in patients"></select>
+                    <div class="clear"></div>
+                </div>
+
+                <div class="checkbox form-group">
+                  <label><input name="isCCM" type="checkbox" ng-model="data.isCCM" />CCM <help help-text="Check the box if this code belongs to a patient under Chronic Care Management(CCM)."/></label>
+                </div>
+              </form>
+          </div>
+      </div>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+</div>

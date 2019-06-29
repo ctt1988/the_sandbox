@@ -1,0 +1,62 @@
+#settings {
+  #surveyControlBar {
+    margin-bottom: 20px;
+  }
+  #patients {
+      .patient-filter{
+          > div {
+             margin-top:15px;
+             margin-bottom:15px;
+             padding-left: 0px !important;
+             padding-right: 0px !important;
+         }
+      }
+      .small-text{
+          font-size: 12px;
+      }
+      .navmargin {
+      margin-top:17px;
+      }
+      .btn-group>.btn {
+        max-width: 148px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+  }
+  #users {
+      .navmargin {
+      margin-top:17px;
+      }
+  }
+  .form-group {
+    margin: 20px 0px;
+  }
+  .bootstrap-tagsinput{
+      @extend .form-control;
+      @extend .col-md-6;
+      @extend .col-xs-12;
+      @extend .clearfix;
+      height: auto;
+      input{
+          width:450px !important;
+      }
+  }
+
+  .tag
+  {
+      font-size: 13px;
+      background-color: $secondary-color;
+      font-weight: normal;
+      line-height: 1.8;
+  }
+  .header{
+    background-color:#f7f6f6;
+  }
+  .otp-clr-code{
+      color:$secondary-color;
+  }
+  .otp-code-area{
+      width: 37%;
+  }
+}

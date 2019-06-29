@@ -1,0 +1,50 @@
+<synsormed-header title="Contact Provider" back-button="true" logged-in="true"></synsormed-header>
+
+<div id="monitor-survey" wait="wait" scroll='true'>
+    <section>
+        <div id="survey-question-container">
+            <div class="survey-question" ng-if="!answered">
+                <h2>My Day</h2>
+                <h3>{{weekDay}}, {{currentDate}}</h3>
+                <div class="row survey-ques-border">
+                    <div class="bg-siz text-center ques-color">Would you like your Care Coordinator to contact you when they are available?</div>
+                    <div class="survey-buttons boolean-options">
+                        <div>
+                            <button ng-click="saveNotifyStatus(true)">Yes</button>
+                        </div>
+                    </div>
+                    <div class="survey-buttons boolean-options">
+                        <div>
+                            <button ng-click="saveNotifyStatus(false)">No</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h3>
+                        Pressing “Yes” will send a notification
+                        to your Care Coordinator to contact
+                        you at their earliest convenience.
+                    </h3>
+                    <h3>
+                        If you have an emergency, please call 911.
+                    </h3>
+                </div>
+            </div>
+            <div ng-if="answered" class="text-center">
+                <h2>My Day</h2>
+                <h3>{{weekDay}}, {{currentDate}}</h3>
+                <div class="row survey-ques-border" ng-if="answer">
+                    <div class="bg-siz text-center ques-color">Your Care Coordinator has been notified</div>
+                    <h3>They will contact you by phone as soon as they can.</h3>
+                </div>
+                <div class="row survey-ques-border" ng-if="!answer">
+                    <div class="bg-siz text-center ques-color">
+                      Thank you for completing your health session.
+                      <br />
+                      Please press the "Home" button of your phone to leave the app.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

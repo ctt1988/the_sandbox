@@ -1,0 +1,59 @@
+{
+  "seeds": {
+    "roles" : {
+      "Admin" : 2,
+      "Provider" :12
+    }
+  },
+  "ssl":true,
+  "server": {
+    "baseUrl": "api.synsormed.com"
+  },
+  "newrelic": {
+    "app_name": "SynsorMed-Prod"
+},
+"otp": {
+   "key" : "a6K3E7eq"
+ },
+ "cron_time_prod": {
+  "cronEnabled": true,
+   "everyNight": {
+     "hour" : "6",
+     "minute": "00"
+   },
+   "everyMidnight": {
+     "hour" : "13",
+     "minute": "1"
+   },
+   "everyEvening": {
+     "hour" : "19",
+     "minute": "1"
+   },
+   "everyMorning": {
+     "hour" : "12",
+     "minute": "1"
+   },
+   "morningSync": {
+     "hour" : "15",
+     "minute": "1"
+   },
+   "eveningSync": {
+     "hour" : "18",
+     "minute": "29"
+   },
+    "afterParticularTime": {
+      "hour" : "2",
+      "minute": "01"
+    },
+    "onTuesday": {
+      "hour" : "13",
+      "minute": "30",
+      "dayOfWeek": "2"
+    },
+    "onFriday": {
+      "hour" : "13",
+      "minute": "30",
+      "dayOfWeek": "5"
+    }
+ }
+}

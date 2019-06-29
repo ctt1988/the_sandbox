@@ -1,0 +1,31 @@
+<div id="login">
+    <synsormed-header show-menu="false"></synsormed-header>
+    <section>
+        <h1>Welcome</h1>
+        <h4>Please log in</h4>
+
+        <div id="login-options">
+            <button class="buttonlg" ng-click="showLogin('patient')"><i></i><span>I'm a Patient</span></button>
+            <button class="buttonlg" ng-click="showLogin('provider')"><i></i><span>I'm a Provider</span></button>
+        </div>
+
+        <!-- <div ng-if="touchPluginAvailable && allowTouchLogin" id="touchIdBtn">
+            <button ng-click="test()" class="btn btn-primary btn-lg">
+                <i class="fa fa-circle-o-notch"> </i>
+                <span> <strong>TochId</strong> </span>
+            </button>
+        </div> -->
+
+        <div id="how-it-works">
+            <a ng-click="showTutorial()">How it works</a>
+        </div>
+        <div id="about">
+            <a ng-click="showAbout()">About</a>
+        </div>
+
+        <div id="copyright">
+            <div><strong>SynsorMed</strong><span> Inc.</span></div>
+            <div>&copy;{{year}}</div>
+        </div>
+    </section>
+</div>

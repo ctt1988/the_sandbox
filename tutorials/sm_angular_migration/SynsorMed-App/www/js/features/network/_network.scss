@@ -1,0 +1,53 @@
+.network-tester{
+  .network-speed-gauge{
+     height:100%;
+     width:100%;
+  }
+
+  #network-options {
+      .buttonlg{
+          padding: 16px;font-size:40px;
+      }
+    margin-top: 1em;
+    margin-bottom: 1em;
+    button {
+      @extend .btn, .btn-success, .btn-lg;
+
+      display: table-row;
+      vertical-align: middle;
+      width: 100%;
+      max-width: $screen-xs; //We don't want these things to stretch all the way across a tablet.
+
+      font-size: $font-size-h3;
+
+      &:first-child {
+        margin-bottom: 1em;
+        i {
+          @extend .fa-arrow-right;
+        }
+      }
+
+      > i, span {
+        display: table-cell;
+        text-align: center;
+      }
+
+      span {
+        width: 100%;
+      }
+
+      i {
+        @extend .fa;
+        @extend .fa-fw;
+        @extend .fa-dashboard;
+      }
+
+    }
+  }
+
+  @media (min-width: $screen-xs) {
+    #network-options button:first-child {
+      margin-bottom: 0px;
+    }
+  }
+}

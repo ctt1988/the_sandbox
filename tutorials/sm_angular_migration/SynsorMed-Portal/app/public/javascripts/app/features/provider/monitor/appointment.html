@@ -1,0 +1,72 @@
+<div id="setAppointment" class="modal-body" style="position: relative" wait="waiting">
+    <alert ng-if="notification" type="danger">{{notification}}</alert>
+    <div class="text-center">
+      <h3>Appointment for {{monitor.patientCode}}</h3>
+    </div>
+    <div class="panel panel-default">
+          <div class="panel-body text-center" ng-if="monitor.encounterId">
+            <h4><i class="fa fa-lg fa-check-circle text-success"></i> An eVisit is already fixed</h4>
+            <h5 class="text-center">Get more details <a ng-click="goToEncounter(monitor.encounterId)">here</a></h5>
+            <div class="text-center">
+              <button class="btn btn-primary" ng-click="resetAppointment()">Offer new eVisit Schedule</button>
+            </div>
+          </div>
+          <div class="panel-body">
+            <form role="form" name="form" ng-if="!monitor.encounterId">
+              <b>eVisits Available for Patient</b>
+              <div class="dropdown" validate>
+                <a class="dropdown-toggle" id="dropdown0" role="button" data-target="#" href="#">
+                  <div class="input-group">
+                    <input name="dropdown0" required type="text" class="form-control" ng-model="date[0]" />
+                    <span class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </span>
+                  </div>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <datetimepicker ng-model="date[0]" datetimepicker-config="{ dropdownSelector: '#dropdown0' }"/>
+                </ul>
+              </div>
+              <div class="dropdown" validate>
+                <a class="dropdown-toggle" id="dropdown1" role="button" data-target="#" href="#">
+                  <div class="input-group">
+                    <input name="dropdown0" required type="text" class="form-control" ng-model="date[1]" />
+                    <span class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </span>
+                  </div>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <datetimepicker ng-model="date[1]" datetimepicker-config="{ dropdownSelector: '#dropdown1' }"/>
+                </ul>
+              </div>
+              <div class="dropdown" validate>
+                <a class="dropdown-toggle" id="dropdown2" role="button" data-target="#" href="#">
+                  <div class="input-group">
+                    <input name="dropdown0" required type="text" class="form-control" ng-model="date[2]" />
+                    <span class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </span>
+                  </div>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <datetimepicker ng-model="date[2]" datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+                </ul>
+              </div>
+              <br />
+            </form>
+            <b>Current Status</b>
+            <ul class="list-group">
+              <li class="list-group-item">Reading<span class='badge badge-new' ng-repeat='name in monitor.measurementName track by $index'>{{name}}</span></li>
+              <!-- <li class="list-group-item">Reading Repetition<span class="badge">{{monitorMeasurements.repeatInterval / (3600)}} Hours</span></li> -->
+              <li class="list-group-item">Missed<span class="badge">{{monitor.isMissed ? 'Yes' : 'No'}}</span></li>
+              <li class="list-group-item">Abnormal Reading<span class="badge">{{monitor.isOutofBound ? 'Yes' : 'No'}}</span></li>
+            </ul>
+          </div>
+      </div>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-if="!monitor.encounterId" ng-click="ok()">OK</button>
+    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+</div>

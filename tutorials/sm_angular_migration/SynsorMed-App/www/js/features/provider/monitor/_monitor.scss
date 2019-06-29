@@ -1,0 +1,133 @@
+#monitor-list {
+  > header {
+    h1 {
+      text-align: left;
+      margin-left: 1em;
+    }
+    a {
+      float: right;
+      margin-top: 1.8em;
+      margin-right: 1em;
+      @extend .btn, .btn-default, .btn-sm;
+    }
+  }
+  section {
+    position: relative;
+    width: 100%;
+    @include vbox();
+  }
+  #instructions {
+    @include hbox;
+    background-color: white;
+    @include box-shadow(rgba(0, 0, 0, .4) 0 4px 10px);
+    z-index: 1;
+    >span {
+      display: block;
+      @include flex;
+      line-height: $line-height-base;
+      padding-top: $padding-base-vertical + 1px;
+      padding-bottom: $padding-base-vertical;
+      padding-left: 1em;
+    }
+    .btn-group.open .dropdown-toggle {
+      box-shadow: none;
+      z-index: 1;
+    }
+    .btn-group {
+      button {
+        &:focus, &:active {
+          box-shadow: none;
+          z-index: 1;
+        }
+        background-color: white;
+      }
+    }
+    .dropdown-menu {
+      left: auto;
+      right: 0;
+    }
+  }
+
+  #waiting-list {
+    padding: 0;
+    > li {
+      display: block;
+      margin-bottom: 1em;
+      padding-bottom: 1em;
+      background-color: white;
+      @include hbox;
+      .details {
+        @extend .col-xs-12;
+        margin-left: 10px;
+        .fl{
+          float: left;
+        }
+        .fr{
+          float: right;
+        }
+        .icons
+        {
+          font-size:35px;
+        }
+        .monitor-code
+        {
+          font-size: 25px;
+          margin-left:25px;
+        }
+        .padding5{
+          padding-top: 5px;
+          padding-right: 5px;
+        }
+      }
+      .actions {
+        @extend .col-xs-5;
+        a {
+          width: 100%;
+          display: block;
+          margin-top: 2em;
+        }
+      }
+      ul {
+        padding: 0;
+        li {
+          list-style: none;
+        }
+      }
+    }
+  }
+  #reload-status {
+    opacity: 0;
+    position: absolute;
+    transition-duration: 1000ms;
+    z-index: -1;
+    font-size: $font-size-large;
+    text-align: center;
+  }
+  #reloader-container {
+    position: relative;
+    @include vbox();
+    @include flex();
+  }
+  #reloader {
+    max-height: 100%;
+    width: 100%;
+    position: absolute;
+    &.pulling {
+      #reload-status {
+        opacity: 1;
+      }
+    }
+    > div {
+      width: 100%;
+      position: absolute;
+      -webkit-transform: translateZ(0);
+      -moz-transform: translateZ(0);
+      -ms-transform: translateZ(0);
+      -o-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+  }
+  .alert p {
+    text-align: center;
+  }
+}

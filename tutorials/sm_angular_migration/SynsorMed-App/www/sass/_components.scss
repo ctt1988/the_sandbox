@@ -1,0 +1,27 @@
+.overlay {
+  background-color: rgba(66, 139, 202, .3);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: progress;
+  z-index: 1051;
+}
+#overlay {
+    @extend .overlay;
+    position: fixed;
+}
+.spinner {
+    z-index: 1051 !important;
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    opacity: .8;
+}
+
+/** HEADER things **/
+.back-button {
+  @extend .fa, .fa-arrow-left, .btn, .btn-primary, .btn-lg;
+  border: transparent;
+}

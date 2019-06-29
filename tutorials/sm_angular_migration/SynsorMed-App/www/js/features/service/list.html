@@ -1,0 +1,67 @@
+<div class="service">
+
+    <synsormed-header></synsormed-header>
+
+    <section>
+      <h3>Available Services</h3>
+      <div class="panel panel-default" ng-repeat="(serviceId,service) in services">
+          <div class="panel-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <td>Service</td>
+                        <td class='text-center'>
+                            <a> {{service.title}} </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Connected</td>
+                        <td class='text-center'>
+                            <span  ng-if='service.connectedLocal'><i class="text-success fa-lg fa fa-check-circle"></i></span>
+                            <span class='text-center' ng-if='!service.connectedLocal'><i class="danger-text fa-lg fa fa-times-circle-o text-center"></i></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class='text-center' colspan="2">
+                            <button ng-if='service.connectedLocal' class="btn btn-warning" ng-click="unlinkService(service.name)">Unlink</button>
+                            <button ng-if='!service.connectedLocal' class="btn btn-success" ng-click="startOauth(serviceId)">Link</button>
+                        </td>
+                    </tr>
+                </table>
+          </div>
+      </div>
+      <div class="panel panel-default" ng-if="healthkitAvailable">
+          <div class="panel-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <td>Service</td>
+                        <td class='text-center'>
+                            <a> HealthKit </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Connected</td>
+                        <td class='text-center'>
+                            <span  ng-if='healthKitConnected && canShare'><i class="text-success fa-lg fa fa-check-circle"></i></span>
+                            <span class='text-center' ng-if='(healthKitConnected && !canShare) || (!healthKitConnected && canShare)'><i class="danger-text fa-lg fa fa-times-circle-o text-center"></i></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class='text-center' colspan="2">
+                            <button ng-if='healthKitConnected && canShare' class="btn btn-warning" ng-click="unLinkHealthKit()">Unlink</button>
+                            <button ng-if='(healthKitConnected && !canShare) || (!healthKitConnected && canShare)' class="btn btn-success" ng-click="startHealthKitAuth()">Link</button>
+                        </td>
+                    </tr>
+                </table>
+          </div>
+      </div>
+      <div class='row' ng-if='connected.length'>
+          <h3>Default Service</h3>
+            <div class="list-group text-center form-group">
+              <select class='form-control' ng-model='default.name' ng-change='changeDefaultService()'>
+                  <option ng-repeat='service in connected'>{{service.name}}</option>
+              </select>
+            </div>
+      </div>
+    </section>
+
+</div>

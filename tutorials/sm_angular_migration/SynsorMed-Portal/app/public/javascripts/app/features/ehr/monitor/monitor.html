@@ -1,0 +1,44 @@
+<div id='ehrMonitor'>
+    <div class="panel panel-default mar-top-20">
+    <div class="modal-body" style="position: relative" wait="waiting">
+        <div class="text-center">
+            <h3>New Monitor</h3>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form role="form" name="form">
+                    <div class="form-group" validate>
+                        <input required placeholder="Monitoring Details" name="description" class="form-control" type="text">
+                    </div>
+
+                    <div class="form-group" validate>
+                        <h5>For Provider</h5>
+                        <select name="forUser" required class="form-control btn-secondary" ng-model="useUser.id" ng-options="user.id as user.name for user in users"></select>
+                    </div>
+                    <div class="form-group" validate>
+                        <input ng-model='data.notify' type='checkbox' />
+                        Send Care Alerts <help help-text="Get notified via email on any out of range or missed readings."/>
+                    </div>
+
+                    <div class="form-group" ng-if="data.notify" validate>
+                        <h5>Sensitivity <help help-text="No. of consecutive missed or out of range readings before notifying"/></h5>
+                        <div range-slider min="1" max="6" model-max="data.sensitivity" pin-handle="min"></div>
+                    </div>
+                    <div class="form-group">
+                        <h5 class="pull-left">Measurements <help help-text="Choose which health indicators you want to monitor"/></h5>
+                        <button type="button" class="pull-right btn btn-secondary btn-sm" ng-click="addIndicator()"><i class="fa fa-plus"></i></button>
+                        <div class="clear"></div>
+                    </div>
+                    <indicator-list monitor-id='monitor.id' measurements='measurements' monitor-measurements='monitorMeasurements'></indicator-list>
+                </form>
+                <small ng-if='!isNew'>(Next Reading date will reset if you update the indicator)</small><br />
+                <small ng-if="monitorMeasurements.length">(* Indicator not saved yet)</small>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">Next</button>
+            <button class="btn btn-default" ng-click="ok()">Close</button>
+        </div>
+    </div>
+</div>
+</div>

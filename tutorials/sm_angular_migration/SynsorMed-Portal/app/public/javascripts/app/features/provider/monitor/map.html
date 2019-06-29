@@ -1,0 +1,14 @@
+<div id="mapMonitor" class="modal-body" wait="waiting">
+    <h4 class="text-center">Monitor-{{patientCode}} Location</h4>
+    <div ng-if="location && location.coords.latitude && location.coords.longitude">
+        <map center="{{userPosition}}" reverse-geocode lat="{{location.coords.latitude}}" lng="{{location.coords.longitude}}" zoom="13" cache="false">
+            <marker position="{{userPosition}}"/>
+        </map>
+   </div>
+    <alert ng-if="!location" type="warning">
+        No location details found for this monitor.
+    </alert>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">Ok</button>
+</div>

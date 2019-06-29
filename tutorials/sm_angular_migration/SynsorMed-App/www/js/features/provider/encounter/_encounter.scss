@@ -1,0 +1,25 @@
+#generateCode
+{
+    > header {
+      h1 {
+        text-align: left;
+        margin-left: 1em;
+      }
+      a {
+        float: right;
+        margin-top: 1.8em;
+        margin-right: 1em;
+        @extend .btn, .btn-default, .btn-sm;
+      }
+    }
+    section {
+      position: relative;
+      width: 100%;
+      @include vbox();
+    }
+     div.well
+     {
+         display: inline-block;
+         text-align: center;
+     }
+}

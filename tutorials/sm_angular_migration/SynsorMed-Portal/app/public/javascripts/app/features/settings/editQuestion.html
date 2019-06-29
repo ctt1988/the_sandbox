@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <h3 class="modal-title">
+        <span ng-if="question.id">Edit Question #{{questionIndex}} </span>
+        <span ng-if="!question.id">Add Question</span>
+    </h3>
+</div>
+<div class="modal-body" style="position: relative" wait="waiting">
+    <form name="form">
+        <div class="form-group" validate>
+            <textarea name="question" placeholder="Question" required class="form-control" ng-model="question.text">{{question.text}}
+            </textarea>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+</div>
+</script>

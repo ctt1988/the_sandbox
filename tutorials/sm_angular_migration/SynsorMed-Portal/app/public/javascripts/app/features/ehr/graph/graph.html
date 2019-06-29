@@ -1,0 +1,16 @@
+<div id='ehrGraph'>
+    <div  class="modal-body" style="position: relative;" wait="waiting">
+        <div class="text-center">
+            <h3>Monitor Readings {{monitor.patientCode}}</h3>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class='mar-bot-15'>
+                    <aura-dropdown selected="selected.id" items="monitorMeasurements" key="id" item="name"></aura-dropdown>
+                </div>
+                <alert ng-if="notification" type="danger">{{notification}}</alert>
+                <highchart ng-hide='notification' id="monitorInsightsModal" class="center-block default-modal-width text-center" config="chartConfig"></highchart>
+            </div>
+        </div>
+    </div>
+</div>

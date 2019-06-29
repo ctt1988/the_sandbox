@@ -1,0 +1,22 @@
+<div id="appointment">
+   <synsormed-header title="Appointment" back-button="false" logged-in="true"></synsormed-header>
+    <section>
+      <div class="panel panel-default">
+          <p class="bg-info">
+          </p>
+          <div class="panel-body">
+            <form name="form">
+              <h2>Choose Appointment Date</h2>
+              <div class="text-center">
+                <div class="radio" ng-repeat="val in monitor.appointmentMeta">
+                  <label><input required name="dateSelect" ng-model="date.selected" type="radio" value="{{val}}">{{val | date : 'medium'}}</label>
+                </div>
+              </div>
+              <div class="text-center">
+                <button class="btn-lg btn btn-success" ng-click="schedule()">Schedule Appointment</button>
+              </div>
+            </form>
+          </div>
+      </div>
+    </section>
+</div>

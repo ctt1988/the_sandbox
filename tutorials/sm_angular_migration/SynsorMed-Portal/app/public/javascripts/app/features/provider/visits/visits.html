@@ -1,0 +1,176 @@
+<div id="visits">
+
+  <!-- Nav tabs -->
+  <!-- Top nav starts  -->
+  <nav class="navbar synsormed-navs navbar-inverse" role="tabs">
+      <div class="container">
+        <!-- Nav brand start -->
+        <div class="navbar-header col-md-2">
+          <button type="button" class="navbar-toggle" data-toggle="collapse"
+           data-target="#collspse-settings-target">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" ><strong>Visits</strong></a>
+        </div>
+        <!-- Nav brand ends-->
+
+        <!-- Nav menu start-->
+        <ul id="collspse-settings-target" role="tablist" class="nav navbar-nav collapse navbar-collapse col-md-10">
+          <li role="presentation" ng-if="user.role == 'Admin' || user.role == 'Provider'" ng-click="editEncounter()"><a>Schedule Visit</a></li>
+          <li class="active" role="presentation" ng-if="user.role == 'Admin' || user.role == 'Provider'"><a href="#worklist" aria-controls="worklist" role="tab" data-toggle="tab">Worklist</a></li>
+        </ul>
+        <!-- Nav menu ends -->
+
+      </div>
+  </nav>
+
+ <!-- Tab panes -->
+ <div class="tab-content">
+
+   <!-- worklist -->
+   <div role="tabpanel" class="tab-pane active" id="worklist">
+     <div id="worklist" class="vbox">
+
+         <div id="worklist-filter" >
+             <div class="container" ng-show="users.length">
+                 <div class="col-sm-5 col-md-2 col-lg-2"><h3>Worklist</h3></div>
+                 <div class="col-sm-7 col-md-5 col-lg-6 col-xs-12 ipad-fix">
+                   <span>
+                       <span class="hidden-xs small-text">Worklist for</span>
+                       <span class="visible-xs-inline small-text">Worklist</span>
+                       <aura-dropdown selected="showUser.id" items="users" key="id" item="name"></aura-dropdown>
+                   </span>
+                   <span>
+                       <aura-dropdown selected="callStatusId" items="callStatus" key="id" item="name"></aura-dropdown>
+                   </span>
+                   <span>
+                       <aura-dropdown selected="pagination.pageSize" items="pagination.pageSizes"></aura-dropdown>
+                       <span class="hidden-xs small-text">Records per page</span>
+                       <span class="visible-xs-inline small-text">Records</span>
+                   </span>
+                 </div>
+                 <div class="col-md-5 col-lg-4 col-xs-12">
+                     <div class="pull-left">
+                       <div class="input-group" datepicker-addon current-date="currentDate">
+                           <span class="hidden-xs input-group-addon small-text">Worklist Date</span>
+                           <input type="text" class="border-secondary form-control input-sm"
+                                datepicker-popup="shortDate"
+                                ng-model="worklistDate"
+                                is-open="datepicker.opened"
+                                datepicker-options="dateOptions"
+                                close-text="Close"
+                                 />
+                           <div class="input-group-btn">
+                               <button type="button" class="btn btn-secondary btn-sm" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                           </div>
+                       </div>
+                     </div>
+                   <div class="pull-right clearfix">
+                       <button ng-click="refreshWorkList()" class="btn btn-primary btn-sm"><strong>REFRESH WORKLIST</strong></button>
+                   </div>
+                 </div>
+             </div>
+
+         </div>
+
+         <div id="worklist-table" wait="worklistLoading" class="flex" ng-if="filteredWorklist.length != 0">
+
+             <div class="synsormed-list-table">
+               <div class="list-head-row">
+                 <div class="container">
+                   <div class="col-md-2 col-sm-3 col-xs-4"><strong>Code</strong></div>
+                   <div class="col-md-2  hidden-xs text-center"><strong>Patient</strong></div>
+                   <div class="col-md-3 col-sm-3 hidden-xs"><strong>Reason for Visit</strong></div>
+                   <div class="col-md-1 col-sm-2 col-xs-4 text-center"><strong>Appointment Time</strong></div>
+                   <div class="col-md-4 col-sm-4 col-xs-4">
+                       <div class="col-md-3 hidden-sm hidden-xs text-center"><strong>Call Completed</strong></div>
+                       <div class="col-md-3 hidden-sm text-center hidden-xs"><strong>Call Duration</strong></div>
+                       <div class="col-md-6 col-sm-12 col-xs-12 text-center"><strong>Actions</strong></div>
+                   </div>
+                 </div>
+               </div>
+               <div class="list-head-row hover-grid" ng-repeat="worklistItem in filteredWorklist">
+
+                 <div class="container">
+                   <div class="col-md-2 col-sm-3 col-xs-4">
+                       <div  class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           <a class="pointer"> {{worklistItem.patientCode}} </a>
+                           <i ng-if="onlineEncounters[worklistItem.id]" class="fa fa-circle online-patient" aria-hidden="true" title="Online"></i>
+                       </div>
+                       <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenu2">
+                           <li><a href="/#/showCode?id={{worklistItem.id}}" > Instructions </a></li>
+                           <li ng-if="worklistItem.location"><a class="pointer" ng-click="displayLocation(worklistItem.patientCode, worklistItem.location)"> Location </a></li>
+                       </ul>
+                   </div>
+                   <div class="col-sm-2 hidden-xs text-center tooltip-auqa-bg" tooltip-placement="top" tooltip-html-unsafe="{{showPatientInfo(worklistItem)}}">
+                       {{worklistItem.patientName || 'N/A'}}
+                   </div>
+                   <div class="col-md-3 col-sm-3 hidden-xs overflow-wrap">{{worklistItem.reasonForVisit}}</div>
+                   <div class="col-md-1 col-sm-2 col-xs-4 text-center">{{worklistItem.scheduledStartTime|date:'shortTime'}}</div>
+                   <div class="col-md-4 col-sm-4 col-xs-4">
+                     <div class="col-md-3 hidden-sm hidden-xs text-center">
+                         <span ng-if="worklistItem.callCompleted" class="fa fa-lg fa-check-circle text-success" title="{{getCallCompletionDate(worklistItem.callStarted, worklistItem.callDuration)}}"></span>
+                         <span ng-if="!worklistItem.callCompleted" class="fa fa-lg fa-times-circle text-warning"></span>
+                     </div>
+                     <div class="col-md-3 hidden-sm hidden-xs text-center">{{callDuration(worklistItem.callDuration)}}</div>
+                     <div class="col-md-6 col-sm-12 col-xs-12 text-center">
+                       <button class="btn btn-secondary btn-sm" ng-click="editEncounter(worklistItem)"><i class="fa fa-edit"></i></button>
+                       <button data-toggle="dropdown" class="dropdown-toggle btn btn-secondary btn-sm btn-options">
+                           <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                       </button>
+                       <ul class="dropdown-menu font-15" role="menu">
+                           <li ng-click="showNotes(worklistItem)">
+                                <a class="pointer">
+                                   <i class="width25 text-center text-secondary fa fa-file-text-o"></i>
+                                   <span> Edit note </span>
+                                </a>
+                           </li>
+                           <li ng-if="user.role.toLowerCase() == 'provider' && onlineEncounters[worklistItem.id]" ng-click="openVideoPopUp(worklistItem.id)">
+                                <a class="pointer">
+                                   <i class="width25 text-center text-secondary fa fa-video-camera"></i>
+                                   <span> Start video call </span>
+                                </a>
+                           </li>
+                           <li ng-click="notifyEncounter(worklistItem)">
+                               <a class="pointer">
+                                  <i class="width25 text-center text-secondary fa fa-bell"></i>
+                                  <span> Send message </span>
+                               </a>
+                           </li>
+                           <li ng-click="deleteEncounter(worklistItem.id)">
+                               <a class="pointer">
+                                  <i class="width25 text-center text-secondary fa fa-trash"></i>
+                                  <span> Delete encounter </span>
+                               </a>
+                           </li>
+                       </ul>
+
+
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+
+             <div class="container text-center">
+               <ul class="pagination" ng-if="pageCount != 1">
+                   <li><span ng-click="pageTurn(-1)"><i class="fa fa-arrow-left"></i> Previous</span></li>
+
+                   <li ng-repeat="aPage in pages" ng-class="{active: pagination.page == aPage}"><span ng-click="pageTo(aPage)">{{aPage}}</span></li>
+                   <li><span ng-click="pageTurn(1)">Next <i class="fa fa-arrow-right"></i></span></li>
+               </ul>
+             </div>
+             <div class="container"><small>Viewing page {{pagination.page}} of {{pageCount}}</small></div>
+         </div>
+         <alert ng-if="!alert.msg && filteredWorklist.length == 0" class="container no-list" type="info">There are no worklist items for this date.</alert>
+         <alert class="container no-list" ng-if="alert.msg" type="{{alert.type}}">{{alert.msg}}</alert>
+     </div>
+
+   </div>
+   <!-- worklist ends -->
+
+ </div>
+ <!-- Tab panes end -->
+</div>

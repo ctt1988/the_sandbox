@@ -1,0 +1,36 @@
+#call-statuses {
+  padding: 0;
+	li {
+		margin-top: 3em;
+        list-style: none;
+		font-size: $font-size-h3;
+		text-align: center;
+		button {
+			margin-top: 1em;
+		}
+      &.online {
+        color: $brand-success;
+      }
+      &.offline {
+        color: $brand-danger;
+      }
+	}
+}
+
+#callContentArea {
+  > header {
+    h1 {
+      text-align: left;
+      margin-left: 1em;
+    }
+    a {
+      float: right;
+      margin-top: 1.8em;
+      margin-right: 1em;
+      @extend .btn, .btn-default, .btn-sm;
+    }
+  }
+  > section {
+    position: relative;
+  }
+}

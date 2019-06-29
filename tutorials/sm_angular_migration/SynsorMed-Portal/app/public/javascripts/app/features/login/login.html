@@ -1,0 +1,48 @@
+<div id="login" class="container">
+
+    <alert ng-if="alert.msg" type="{{alert.type}}">{{alert.msg}}</alert>
+    <div ng-if="showRegistrationMessage">
+        <alert type="success">
+            Registration successful! Please <a href="#/login">login now</a>.
+        </alert>
+    </div>
+
+    <div class="col-md-4 col-md-offset-4">
+      <div class="text-center"><img src="/images/logo_new1.png" style="height:100px;"/></div>
+      <div class="text-center"><h4>Welcome, Please Login</h4></div>
+      <div class="panel panel-default">
+          <div class="panel-body">
+              <form role="form" name="form">
+                  <input required type="email" class="form-control" placeholder="Enter email" ng-model="email">
+                  <div class="password-container">
+                    <input required show-password="passwordView" type="password" class="form-control" placeholder="Password" ng-model="password">
+                    <a class="password-view" ng-click="passwordView = !passwordView">
+                      <i class="fa" ng-class="passwordView ? 'fa-eye-slash' : 'fa-eye'" />
+                    </a>
+                  </div>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" ng-model="rememberMe"> Remember Me
+                    </label>
+                  </div>
+                  <button type="submit" class="btn btn-primary form-control" ng-click="submit()">Submit</button>
+              </form>
+              <div class="forgot-link">
+                 <div class="float-left">
+                      <a href="#/forgot">Forgot Password ?</a>
+                </div>
+                 <div class="float-right">
+                     <a href="#/emergency" class="fa fa-exclamation-triangle emergency-link" title="Emergency Access"></a>
+                </div>
+                <div class="clear"></div>
+              </div>
+              <!-- Not applicable iin this workflow 102917
+               <div class="forgot-link">
+                     <a href="#/patient">Login as Patient</a>
+               </div>
+             -->
+          </div>
+      </div>
+    </div>
+
+</div>

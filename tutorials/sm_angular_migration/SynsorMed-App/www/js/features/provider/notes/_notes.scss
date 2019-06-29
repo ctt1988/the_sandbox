@@ -1,0 +1,27 @@
+
+#note-editor {
+    @include vbox;
+
+    #note-editor-buttons {
+      margin-top: 1em;
+      text-align: center;
+
+      > div {
+        @extend .col-xs-6;
+        > a {
+          color: $brand-primary;
+          font-size: $font-size-h1;
+        }
+      }
+    }
+
+    #note-editor-container {
+        @include vbox();
+        @include flex();
+        textarea {
+            @include flex();
+            display: block;
+            border: 1px solid $gray;
+        }
+    }
+}

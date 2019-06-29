@@ -1,0 +1,15 @@
+.service {
+    .danger-text{
+        color: $brand-danger;
+    }
+  .list-group{
+    width:80%;
+    margin : 0 auto;
+    .list-group-item {
+      margin : 0 auto;
+    }
+  }
+  #unlink-container{
+    padding-top: 10px;
+  }
+}

@@ -1,0 +1,26 @@
+#generateCode{
+	.timepicker {
+			td > input, td > button{
+			color : #FFFFFF;
+			background-color: $secondary-color;
+			width:70px;
+		}
+	}
+	form > input{
+		margin-top: 10px;
+	}
+	.input-group{ 
+		margin-top:10px;
+		> input{
+		margin:0px;
+		}
+	}
+	 small{
+	 	display: table-row;
+	 }
+	 .input-group-btn{
+	 	.btn-secondary{
+	 		 border-radius: 0px 5px 5px 0px;
+	 	}
+	 }
+}

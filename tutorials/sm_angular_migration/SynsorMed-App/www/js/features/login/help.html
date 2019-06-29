@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h3 class="modal-title" ng-click="support()">SynsorMed Support</h3>
+</div>
+<div class="modal-body" id="helpBody">
+	<div>
+		<div>
+			<i class="fa fa-5x fa-phone helpIcons"></i>
+            <div><a href="tel:8886051455">888-605-1455</a></div>
+		</div>
+<!-- 		<div>
+			<i class="fa fa-5x fa-envelope helpIcons"></i>
+      <div><a href="mailto:customerservice.usa@chartindustries.com">customerservice.usa@chartindustries.com</a></div>
+      <div><a href="mailto:techservice.usa@chartindustries.com">techservice.usa@chartindustries.com</a></div>
+		</div>
+	</div> -->
+
+</div>
+<div class="modal-footer">
+  <div class="row">
+    <div class="col-md-6 col-xs-12 text-center">
+      <a ng-click="removeAuthenticatedCodes()">Remove Authenticated Codes</a>
+    </div>
+    <div class="col-md-6 col-xs-12 text-center" ng-if="showEnvLink">
+      <a ng-click="showEnv()">Change Environment</a>
+    </div>
+  </div>
+    <button class="btn btn-warning" ng-click="close()">Close</button>
+</div>

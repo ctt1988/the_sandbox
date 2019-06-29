@@ -1,0 +1,14 @@
+<div id="mapMonitor" class="modal-body" wait="waiting">
+    <h4 class="text-center">Encounter-{{patientCode}} Location</h4>
+    <div ng-if="location">
+        <map center="{{userPosition}}" zoom="13">
+            <marker position="{{userPosition}}" />
+        </map>
+    </div>
+    <alert ng-if="!location" type="warning">
+        No location details found for this encounter.
+    </alert>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">Ok</button>
+</div>

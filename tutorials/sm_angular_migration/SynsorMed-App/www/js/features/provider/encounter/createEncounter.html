@@ -1,0 +1,37 @@
+    <div id="generateCode">
+        <synsormed-header title="eVisit Code" back-button="false" is-provider="true" logged-in="true"></synsormed-header>
+        <section>
+            <div class="panel panel-default">
+                <div class="text-center">
+                  <h3>Schedule Visit</h3>
+                </div>
+                  <div class="panel-body">
+                      <form role="form" name="form">
+                        <div class="form-group" validate>
+                            <input required placeholder="Reason for visit" name="reasonForVisit" class="form-control" type="text" ng-model="data.reasonForVisit">
+                        </div>
+                        <div class="form-group">
+                            <h5>Follow Up Date</h5>
+                            <div class='text-center'>
+                                <datepicker ng-model="data.followupDate" ng-change='change()' min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h5>Follow Up Time</h5>
+                            <timepicker ng-model="data.followupTime" ng-change='change()' hour-step="hstep" minute-step="mstep" show-meridian="true"></timepicker>
+                        </div>
+                        <div class="form-group" validate>
+                            <h5>Worklist for: &nbsp;&nbsp;&nbsp;{{User.name}}</h5>
+                        </div>
+
+                        <div class="checkbox form-group">
+                          <label><input name="isCCM" type="checkbox" ng-model="data.isCCM" />Is CCM <help help-text="Is this code belongs to a patient under Chronic Care Management(CCM)."/></label>
+                        </div>
+                      </form>
+                  </div>
+              <div class='modal-footer'>
+                  <button class="btn btn-primary" ng-click="ok()">Save</button>
+              </div>
+          </div>
+      </section>
+    </div>

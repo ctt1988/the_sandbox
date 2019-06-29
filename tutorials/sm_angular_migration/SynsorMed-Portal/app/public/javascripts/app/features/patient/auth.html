@@ -1,0 +1,30 @@
+<div id="patient-auth" class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="text-center"><img src="/images/logo_new1.png" /></div>
+            <h4 class="text-center">Patient login</h4>
+            <alert ng-repeat="alert in alerts" class="text-center" type="{{alert.type}}">{{alert.msg}}</alert>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form name="patient-form">
+                        <div class="form-group" validate>
+                            <label>Patient Code</label>
+                            <input maxlength="10" class="form-control text-uppercase" type="text" required name="patientCode" placeholder="Patient Code" ng-model="patientCode">
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-xs-4">
+                                <button type="submit" class="btn btn-primary" ng-click="submit()">Submit</button>
+                            </div>
+                            <div class="col-sm-3 col-xs-3 text-center margin-top-6">
+                                <b> or </b>
+                            </div>
+                            <div class="col-sm-5 col-xs-5 margin-top-6">
+                                <a href="#/login" class="pull-right">Login as Physician</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

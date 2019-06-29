@@ -1,0 +1,22 @@
+#agreementView {
+  .terms {
+    @extend .panel, .panel-default;
+    margin: .2em;
+    > div {
+      @extend .panel-body;
+    }
+  }
+
+  #agreementButtons {
+    @include hbox;
+    > * {
+      @include flex;
+      @extend .btn, .btn-lg, .btn-primary;
+      display: block;
+      &:first-child {
+        @extend .btn-default;
+      }
+      margin: 5px;
+    }
+  }
+}

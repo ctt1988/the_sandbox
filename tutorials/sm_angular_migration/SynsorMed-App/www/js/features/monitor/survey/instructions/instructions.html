@@ -1,0 +1,19 @@
+<div ng-if="surveyInstructions && surveyInstructions.length">
+     <div class="modal-body" style="position: relative;">
+         <div class="text-center">
+             <h3>Survey Instructions</h3>
+         </div>
+         <div class="panel panel-default">
+             <div class="panel-body panel-fix">
+                 <div class="center">
+                    {{instruction.text}}
+                 </div>
+             </div>
+         </div>
+     </div>
+     <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="nextInstruction()">
+            {{btnTxt}}
+        </button>
+     </div>
+</div>

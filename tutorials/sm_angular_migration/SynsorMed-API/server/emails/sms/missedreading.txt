@@ -1,0 +1,1 @@
+The patient code zzzCodezzz with description zzzDetailszzz has missed a scheduled reading on zzzDatezzz.

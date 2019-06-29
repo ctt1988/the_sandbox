@@ -1,0 +1,89 @@
+{
+  "db": {
+    "uri": "mysql://synsormeddbuser3:Synsor$2014@synsormeddb.chpz4ehatu7k.us-east-2.rds.amazonaws.com:3603/synsormed_stage?sslca=config/ssl/rds-ca-2015-root.pem",
+    "reconnect": true
+  },
+  "logging": {
+    "level": 2,
+    "logging_token": "c2307bce-f27b-44f6-844f-ce53d081456e",
+    "db":{
+        "host" : "localhost",
+        "database" : "logs_sysormed",
+        "user" : "root",
+        "password" : "root"
+    }
+  },
+  "server": {
+    "port": 9000,
+    "baseUrl": "localhost:9000"
+  },
+  "newrelic": {
+    "level": "trace",
+    "app_name": "SynsorMed-Local"
+  },
+  "push_notifications": {
+     "mock": true,
+     "active_org_ids": []
+  },
+  "sms":{
+     "mock": true
+  },
+  "email" : {
+     "mock" : true,
+     "nodemailer" : {
+        "service" : "Mailgun",
+        "auth" : {
+          "user" : "postmaster@sandboxe50b0cef9d31402592c3b89f953e4b70.mailgun.org",
+          "pass" : "a1777fe35d0f26ef4bfa9398560d570c"
+        }
+      },
+      "admin" : {
+        "identity" :"SynsorMed <admin@synsormed.com>"
+      }
+  },
+  "plivo":{
+     "authId": "MAZJRHZJQWYZK1YME2YJ",
+     "authToken": "ZDQ1MmMyYjI0ZGU2MTg5ZDRjNDU3OGI4MmNmNDQz"
+  },
+  "cron_time_dev": {
+    "cronEnabled": false,
+    "everyNight": {
+      "hour" : "12",
+      "minute": "19"
+    },
+    "everyMidnight": {
+      "hour" : "13",
+      "minute": "29"
+    },
+    "everyEvening": {
+      "hour" : "19",
+      "minute": "29"
+    },
+    "everyMorning": {
+      "hour" : "12",
+      "minute": "29"
+    },
+    "morningSync": {
+      "hour" : "15",
+      "minute": "29"
+    },
+    "eveningSync": {
+      "hour" : "19",
+      "minute": "1"
+    },
+    "afterParticularTime": {
+      "hour" : "19",
+      "minute": "1"
+    },
+    "onTuesday": {
+      "hour" : "15",
+      "minute": "30",
+      "dayOfWeek": "2"
+    },
+    "onFriday": {
+      "hour" : "15",
+      "minute": "30",
+      "dayOfWeek": "5"
+    }
+  }
+}

@@ -1,0 +1,74 @@
+<div ng-if="!bleScanScreen && !waiting">
+     <div class="modal-body" style="position: relative;">
+         <div class="text-center">
+             <h3>Starting scan</h3>
+         </div>
+         <div class="panel panel-default">
+             <div class="panel-body panel-fix">
+                 <div class="center">
+                     Please stand on the scale to take your weight measurement
+                 </div>
+             </div>
+         </div>
+     </div>
+     <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="moveFromPreScan()">Next</button>
+     </div>
+</div>
+<div ng-if="waiting">
+     <div class="modal-body" style="position: relative;">
+         <div class="text-center">
+             <h3>Gathering data</h3>
+         </div>
+         <div class="panel panel-default">
+             <div class="panel-body panel-fix">
+                 <div class="progress" style='margin-bottom:0px'>
+                     <div class="progress-bar progress-bar-striped active" role="progressbar"
+              aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:{{noninDataLength ? (noninDataLength*10) : 0}}%">
+                     </div>
+                 </div>
+                 <span>{{noninDataLength ? (noninDataLength*10) : 0}}%</span>
+             </div>
+         </div>
+     </div>
+</div>
+<div ng-if="bleScanScreen && !waiting">
+    <div id="monitor-device-list" class="modal-body" style="position: relative;">
+        <div class="text-center">
+            <h3>Available Devices</h3>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body panel-fix">
+                <div class="center">
+                    <div ng-if="devices.length && !searching" >
+                        <h6>Found Devices</h6>
+                        <ul class="list-group show-ble-devices">
+                            <li ng-repeat="device in devices" class="pointer list-group-item">
+                                {{device.name || device.address}}
+                                <span class="pull-right">
+                                    <a  class="btn-device-link" ng-click="connectDevice(device.address, device.name)">
+                                        {{!connected[device.address] ? 'Connect' : 'Sync'}}
+                                    </a>
+                                    <i ng-if='connected && connected[device.address]' class="text-success fa-lg fa fa-check-circle"></i>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div ng-if="!devices.length && !searching" class="text-center" >
+                         <h4> No Device Found </h4>
+                         <i class="warning-text fa-2x fa fa fa-times-circle"></i>
+                    </div>
+                    <div class="text-center" ng-if="searching">
+                        <i class="fa-lg fa fa-bluetooth bluetooth-size blink" aria-hidden="true"></i>
+                        <h4 class="text-success scan-margin">Scanning</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+       <button class="btn btn-primary" ng-click="getDevices()" ng-disabled="searching">{{scanBtn}}</button>
+       <button class="btn btn-primary" ng-click="ok()">OK</button>
+    </div>
+</div>

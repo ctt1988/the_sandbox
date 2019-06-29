@@ -1,0 +1,21 @@
+<div wait="waiting">
+    <div class="modal-body" style="position: relative">
+        <div class="modal-header">
+            <div class="text-center">
+                <h3>License</h3>
+            </div>
+        </div>
+        <div class="modal-body" style="position: relative">
+            <form name="form">
+                <div class="form-group" validate>
+                    <input type="text" ng-model="$parent.licenseCount" required name="license" placeholder="Enter License" class="form-control" ng-pattern="/^[0-9]*$/">
+                    </textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="send()">Send</button>
+        <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+    </div>
+</div>

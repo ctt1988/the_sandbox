@@ -1,0 +1,28 @@
+#dashboard {
+  > header {
+    h1 {
+      text-align: center;
+    }
+  }
+  section {
+    position: relative;
+    width: 100%;
+    @include vbox();
+  }
+  button {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    @extend .btn, .btn-primary, .btn-sm;
+  }
+  .panel-header {
+    background-color : #F05F3A;
+    .panel-heading {
+      color : #FFFFFF;
+    }
+  }
+  #patient-details{
+    .list-group-item .badge{
+      font-size:14px;
+    }
+  }
+}

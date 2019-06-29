@@ -1,0 +1,18 @@
+<synsormed-header title="Synsormed" back-button="true" logged-in="true"></synsormed-header>
+
+<div id="monitor-survey" wait="wait" scroll='true' ng-if="!greetingComplete">
+  <section>
+    <div id="survey-question-container">
+      <div>
+        <div class="row survey-ques-border">
+          <div class="bg-siz text-center ques-color">
+            Thank you for starting your health session. Click below when you are ready to get started
+          </div>
+        </div>
+        <div class="text-center">
+          <button class="button btn-lg btn-success btn-text" ng-click="onBegin()"><span>Begin</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

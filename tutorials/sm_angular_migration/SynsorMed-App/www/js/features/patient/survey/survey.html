@@ -1,0 +1,32 @@
+<div id="survey" wait="wait" scroll='true'>
+    <section>
+        <form id="survey-question-container">
+            <div class="survey-question" ng-repeat='question in questions' ng-if="answers[$index] === null">
+                <div>{{question.text}}</div>
+                <div class="survey-buttons">
+                    <div><button ng-click="setAnswer($index, true)"><i class="fa fa-check-circle"></i></button></div>
+                    <div><button ng-click="setAnswer($index, false)"><i class="fa fa-times-circle"></i></button></div>
+                </div>
+                <!--<div class='col'>-->
+
+                    <!--<div class='row'>-->
+                        <!--<label class="col item item-radio">-->
+                            <!--<input ng-model='answers[$index]' ng-value='{{true}}' type="radio" name="question{{question.id}}">-->
+                            <!--<div class="item-content">-->
+                                <!--Yes-->
+                            <!--</div>-->
+                            <!--<i class="radio-icon ion-checkmark"></i>-->
+                        <!--</label>-->
+                        <!--<label class="col item item-radio">-->
+                            <!--<input ng-model='answers[$index]' ng-value='{{false}}' type="radio" name="question{{question.id}}">-->
+                            <!--<div class="item-content">-->
+                                <!--No-->
+                            <!--</div>-->
+                            <!--<i class="radio-icon ion-checkmark"></i>-->
+                        <!--</label>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+        </form>
+    </section>
+</div>

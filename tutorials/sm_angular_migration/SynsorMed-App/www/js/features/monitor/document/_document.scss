@@ -1,0 +1,37 @@
+#documents{
+    .break-word{
+        word-break: break-word;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    .table {
+      margin-bottom: 0px;
+      td {
+        text-align: center;
+        border: 0px;
+      }
+    }
+    .panel-heading
+    {
+        background-color: #fff;
+    }
+    .panel-title {
+        margin-bottom: 10px;
+    }
+    .alert-info{
+        color: grey;
+    }
+    .danger-text{
+        color: $brand-danger;
+    }
+    .warning-text{
+        color: $brand-warning;
+    }
+    .icon-color{
+        background-color:#F05F3A;
+        color:#fff;
+    }
+    h2 {
+      margin-top: 0px;
+    }
+}

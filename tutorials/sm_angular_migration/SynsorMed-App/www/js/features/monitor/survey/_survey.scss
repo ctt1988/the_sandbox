@@ -1,0 +1,214 @@
+#monitor-survey {
+  position: relative;
+  background: #fff !important;
+  // styling to prevent from text selection
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  > section{
+    @extend .absolute-fit;
+  }
+
+  .scaling-slider{
+    width: 80%;
+    margin: 0 auto;
+  }
+  @media screen and (min-width: 1200px) {
+    .bg-siz{
+      font-size: 5em !important;
+      padding: 1em 0 0.5em !important;
+    }
+
+    .img-row img{
+      width: 200px !important;
+      height: 200px !important;
+    }
+  }
+  @media screen and (min-width: 750px) {
+    .bg-siz{
+      font-size: 3.5em !important;
+      padding: 1em 0 0.5em !important;
+    }
+
+    .img-row img{
+      width: 200px !important;
+      height: 200px !important;
+    }
+  }
+  @media screen and (max-width: 1200) {
+    .bg-siz{
+      font-size: 3.5em !important;
+      padding: 1em 0 0.5em !important;
+    }
+    .img-row img{
+      width: 200px !important;
+      height: 200px !important;
+    }
+  }
+  .bg-siz{
+    font-size: 1.6em;
+    padding: 20px 0 5px;
+  }
+  h1, h3 {
+    margin: 5px 0;
+  }
+  .img-row img{
+    width: 50%;
+    height: 50%;
+  }
+  .ques-color{
+    color:#353030;
+  }
+
+  .next-btn{
+    padding: 10px 50px !important;
+    background: #fff;
+    border: 2px solid #00ABA2;
+    padding: 10px 0px;
+    border-radius: 10px;
+    float:right;
+    margin: 10px;
+  }
+
+  .btn-survey{
+    background: #fff;
+    min-width: 100px;
+    border: 2px solid #00ABA2;
+    color: #00ABA2;
+    font-size: 40px;
+    padding: 10px 0px;
+    overflow-wrap: break-word;
+    -webkit-transition-duration: 600ms;
+    transition-duration: 600ms;
+    border-radius: 10px;
+    i {
+      @extend .fa-3x;
+    }
+  }
+
+  #survey-question-container{
+    @extend .clearfix;
+    margin: auto;
+    .arrow-up, .arrow-down{
+      font-size:100px;
+      color:$brand-primary;
+    }
+
+    .pad5{
+      padding:5px;
+    }
+
+    .value-container{
+      width: 100%;
+      max-width: 200px;
+      height: 75px;
+      font-size: 45px;
+      border: none;
+    }
+
+    .survey-question{
+      background-color: white;
+      //padding: 1em;
+      -webkit-transition-duration: 600ms;
+      transition-duration: 600ms;
+      z-index: 10;
+      display: none;
+
+      @for $i from 0 through 4 {
+        &:nth-child(#{$i + 1}) {
+          z-index: 10 - $i;
+        }
+      }
+
+      >h1:first-child{
+        color:#8B8B8B !important;
+      }
+
+      > div:first-child {
+        @include flex();
+        // overflow-y: auto;
+        text-align:justify;
+        @media screen and (min-width:600px) {
+          font-size:3.0vw;
+        }
+      }
+      .survey-buttons {
+        div{
+          @extend .text-center;
+          @extend .col-xs-6;
+          padding: 5px;
+        }
+        button {
+          @extend .btn-survey;
+        }
+      }
+      .boolean-options{
+        button {
+          width: 80%;
+        }
+
+        @media screen and (max-width: 1200px) {
+          button{
+            font-size: 45px !important;
+          }
+        }
+        @media screen and (max-width: 980px) {
+          button{
+            font-size: 40px !important;
+          }
+        }
+        @media screen and (max-width: 800px) {
+          button{
+            font-size: 36px !important;
+          }
+        }
+        @media screen and (max-width: 640px) {
+          button{
+            font-size: 32px !important;
+          }
+        }
+        @media screen and (max-width: 480px) {
+          button{
+            font-size: 20px !important;
+          }
+        }
+      }
+
+      &.ng-enter, &.ng-leave {
+        &.ng-enter, &.ng-leave.ng-leave-active {
+          opacity:0;
+          transform: translate(0%, -40%) scale(2);
+          -webkit-transform: translate(0%, -40%) scale(2);
+        }
+        &.ng-leave, &.ng-enter.ng-enter-active {
+          opacity:1;
+        }
+      }
+    }
+
+    .survey-question:first-child{
+      display: block !important;
+    }
+    .survey-ques-border{
+      border:2px solid #00ABA2;
+      border-radius:10px;
+      padding-bottom: 1em;
+      margin:1em;
+    }
+  }
+  .btn-text{
+    padding: 15px;
+    font-size: 30px;
+    margin-top: 20px;
+    border: none;
+    background-color: #00ABA2;
+    color: #fff;
+    span{
+      padding: 10px;
+    }
+  }
+}

@@ -1,0 +1,62 @@
+.network-stats{
+  position: fixed;
+  right: 0px;
+  top: 10px;
+  z-index: 10;
+  background-color: rgba(255,255,255,0);
+  > .network-gauge-weak{
+      color: #FC6938;
+      background-color: #FC6938;
+  }
+  > .network-gauge-strong {
+      color: #55BF3B;
+      background-color: #55BF3B;
+  }
+}
+
+.beacon{
+  height:15px;
+  width:15px;
+  display: inline-block;
+  border-radius:50%;
+  -webkit-transform:translateX(-50%) translateY(-50%);
+}
+.beacon:before{
+  content:"";
+  height:15px;
+  width:15px;
+  display: inline-block;
+  background-color:transparent;
+  border-radius:50%;
+  box-shadow:0px 0px 2px 2px #FFFFFF;
+  -webkit-animation:active 2s infinite linear;
+  animation:active 2s infinite linear;
+}
+
+@-webkit-keyframes active{
+  0%{
+    -webkit-transform:scale(.1);
+    opacity:1;
+  }
+  70%{
+    -webkit-transform:scale(2);
+    opacity:0;
+  }
+  100%{
+    opacity:0;
+  }
+}
+
+@keyframes active{
+  0%{
+    transform:scale(.1);
+    opacity:1;
+  }
+  70%{
+    transform:scale(2);
+    opacity:0;
+  }
+  100%{
+    opacity:0;
+  }
+}

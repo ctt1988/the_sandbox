@@ -1,0 +1,24 @@
+<div id="appData">
+  <div class="modal-header service-header">
+      <h3 class="modal-title font-col">
+        Device Summary
+      </h3>
+  </div>
+  <div class="modal-body service-body">
+    <h4 class="font-col" ng-if="measurements[0].serviceName.toLowerCase() != 'c5'">Device Name: {{measurements[0].displayName}}</h4>
+    <h4 class="font-col" ng-if="measurements[0].serviceName.toLowerCase() == 'c5'">Device Name: Companion 5</h4>
+    <h4 class="font-col" ng-if="usageHours <= 0 && usageMinutes > 0 && measurements[0].serviceName.toLowerCase() == 'c5'">Usage: {{usageMinutes}} Minutes</h4>
+    <h4 class="font-col" ng-if="usageHours > 0 && measurements[0].serviceName.toLowerCase() == 'c5'">Usage: {{usageHours}} Hours and {{usageMinutes}} Minutes</h4>
+    <h4 class="font-col" ng-if="measurements[0].serviceName.toLowerCase() == 'eclipse'">Usage: 3 Hours</h4>
+    <h4 class="font-col" ng-if="measurements[0].serviceName.toLowerCase() == 'c5' || measurements[0].serviceName.toLowerCase() == 'eclipse'">Target Flow Rate: {{targetFlowRate}} lpm</h4>
+    <h4 class="font-col" ng-if="measurements[0].serviceName.toLowerCase() == 'c5' || measurements[0].serviceName.toLowerCase() == 'eclipse'">Latest Flow Rate: {{mostRecentFlowRate}} lpm</h4>
+    <div>
+      <!--<h3 class="font-col" ng-if="measurements[0].serviceName.toLowerCase() == 'c5'" ng-click="patientInfo()">View Patient info</h3>-->
+      <h3 class="font-col" ng-if="measurements[0].serviceName.toLowerCase() == 'c5' || measurements[0].serviceName.toLowerCase() == 'eclipse'" ng-click="selectedMeasurement('Oxygen flow')"><u>View Detailed Data</u></h3>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+      <button class="btn btn-warning" ng-click="ok()">Close</button>
+  </div>
+</div>

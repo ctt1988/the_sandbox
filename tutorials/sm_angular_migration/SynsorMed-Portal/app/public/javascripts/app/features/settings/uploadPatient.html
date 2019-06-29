@@ -1,0 +1,20 @@
+<div wait="waiting">
+    <div class="modal-body" style="position: relative">
+        <div class="modal-header">
+            <div class="text-center">
+                <h3>Upload File</h3>
+            </div>
+        </div>
+        <div class="modal-body" style="position: relative">
+            <form name="form" role="form">
+                <div class="form-group" validate>
+                    <input type="file" required class="form-control" file-model="myFile"/>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="uploadFile()">Send</button>
+        <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+    </div>
+</div>

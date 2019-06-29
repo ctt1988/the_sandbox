@@ -1,0 +1,12 @@
+#messages{
+    .msg-wrap{
+        position: relative;
+    }
+    .msg-time{
+        position:absolute;
+        bottom:0;
+        right:0;
+        padding-right: 5px;
+        font-size: 10px;
+    }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "SynsorMed-Portal",
+  "version": "0.0.1",
+  "dependencies": {
+    "jquery": "*",
+    "angular": "*",
+    "angular-route": "*",
+    "angular-ui-bootstrap-bower": "~0.11.0",
+    "spin.js": "~2.0.1",
+    "angular-local-storage": "~0.0.7",
+    "autofill-event": "~1.0.0",
+    "angular-animate": "~1.2.25",
+    "highcharts-ng": "~0.0.8"
+  }
+}

@@ -1,0 +1,98 @@
+<div id="showMonitor">
+     <div class="header">
+         <div class="container">
+           <div class="col-md-8 col-xs-6"><h3>Monitor Code</h3></div>
+           <div class="col-md-4 col-xs-6">
+             <div class="form-group text-right">
+               <button class="btn btn-primary btn-sm" ng-click="SendEmail()"><strong>EMAIL</strong></button>
+               <button class="btn btn-primary btn-sm" ng-click="printInfo()"><strong>PRINT THIS INFORMATION</strong></button>
+             </div>
+           </div>
+         </div>
+    </div>
+
+    <div class="container">
+        <div class="col-md-10 col-md-offset-1 code-wrap">
+            <div class="text-center"><strong>Your Code Is Below</strong></div>
+            <div class="text-center"><h1><strong>{{monitor.patientCode}}</strong></h1></div>
+            <img class="img-responsive" src="/images/download-instructions.png?v=2" />
+                <!-- <div class="col-md-6">
+                    <div class="reason-wrap">
+                        <strong>Monitor Description</strong>
+                        <ul>
+                            <li><p>{{monitor.description}}</p></li>
+                        </ul>
+                        <strong>Start Date</strong>
+                        <ul>
+                            <li>{{monitor.createdAt | date:'short'}}</li>
+                        </ul>
+                    </div>
+                    <div class="well">
+                        <strong class="warning">WARNING</strong>
+                        <ul>
+                            <li>In an emergency, DO NOT use the app! Call 911 or go to your nearest Emergency Room!</li>
+                        </ul>
+                    </div>
+                </div> -->
+        </div>
+        <!-- <div class="col-md-12 headings-wrap">
+            <ol>
+                <li><strong>Download The App</strong>
+                    <div class="row description-images">
+                        <div class="col-md-4 col-xs-4">
+                            <img src="/images/1_a@2x.png" />
+                        </div>
+                        <div class="col-md-4 col-xs-4">
+                            <img src="/images/1_b@2x.png" />
+                        </div>
+                        <div class="col-md-4 col-xs-4">
+                            <img src="/images/1_c@2x.png" />
+                        </div>
+                    </div>
+                </li>
+                <li><strong>Login</strong>
+                    <div class="row description-images">
+                        <div class="col-md-4 col-xs-4">
+                            <img src="/images/2_a@2x.png" />
+                        </div>
+                        <div class="col-md-4 col-xs-4">
+                            <img src="/images/2_b@2x.png" />
+                        </div>
+                        <div class="col-md-4 col-xs-4">
+                            <img src="/images/2_c@2x.png" />
+                        </div>
+                    </div>
+                </li>
+                <li><strong>CAIREview Connect</strong>
+                    <div class="row description-images">
+                        <div class="col-md-4 col-xs-4">
+                            <img src="/images/3_a@2x.png" />
+                        </div>
+                        <div class="col-md-4 col-xs-4">
+                            <img src="/images/3_b@2x.png" />
+                        </div>
+                        <div class="col-md-4 col-xs-4">
+                            <img src="/images/3_c@2x.png" />
+                        </div>
+                    </div>
+                </li>
+                <li><strong>Next Reading</strong>
+                    <div class="row description-images">
+                        <div class="col-md-4 col-xs-4">
+                            <img src="/images/4_a@2x.png" />
+                        </div>
+                        <div class="col-md-4 col-xs-4">
+                            <img src="/images/4_b@2x.png" />
+                        </div>
+                        <div class="col-md-4 col-xs-4">
+                            <img src="/images/4_c@2x.png" />
+                        </div>
+                    </div>
+                </li>
+            </ol>
+        </div> -->
+        <div class="col-md-12">
+            <div class="text-center footer"><strong>SynsorMed Support - <a href="mailto:support@synsormed.com" target="_top">support@synsormed.com</a> - 888-605-1440</strong></div>
+        </div>
+    </div>
+</div>

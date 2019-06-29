@@ -1,0 +1,7 @@
+[
+    {"provider":"at&t", "domain":"@txt.att.net", "country": "usa"},
+    {"provider":"verizon", "domain":"@vtext.com", "country": "usa"},
+    {"provider":"t-mobile", "domain":"@tmomail.net", "country": "usa"},
+    {"provider":"sprint pcs", "domain":"@messaging.sprintpcs.co", "country": "usa"},
+    {"provider":"idea", "domain":"@ideacellular.net", "country": "india"}
+]

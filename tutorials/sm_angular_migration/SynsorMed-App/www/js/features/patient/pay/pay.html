@@ -1,0 +1,45 @@
+<div id="pay">
+    <synsormed-header></synsormed-header>
+    <section>
+    <h2>Payment</h2>
+        <form name='form' class="container-fluid">
+                <div class="form-group input-group input-group-lg" validate no-msg>
+                    <div class="input-group-addon"><i class="fa fa-credit-card"></i></div>
+                    <input class="form-control no-message" required name="card" type="number" ng-model="payment.card" placeholder="Card number">
+                </div>
+
+                <div class="form-group input-group input-group-lg" validate no-msg>
+                    <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                    <input class="form-control no-message" required name="name" type="text" ng-model="payment.name" placeholder="Cardholder">
+                </div>
+
+                <div class="clearfix">
+                    <div id="expirationDate" class="form-group input-group-lg col-xs-8">
+                        <div validate no-msg>
+                            <input class="form-control no-message col-xs-6 input-lg" required name="expMonth" min="1" max='12' ng-model='payment.exp.month' type="number" placeholder="MM">
+                        </div>
+                        <div validate no-msg>
+                            <input class="form-control no-message col-xs-6 input-lg" required name="expYear" min="14" max="22" ng-model='payment.exp.year' type="number" placeholder="YY">
+                        </div>
+                    </div>
+                    <div id="cvv" class="form-group input-group-lg col-xs-4"  validate no-msg>
+                        <input class="form-control no-message" required name="cvv" type="number" ng-model="payment.cvv" placeholder="CVV">
+                    </div>
+                </div>
+                <div class="form-group input-group input-group-lg" validate no-msg>
+                    <div class="input-group-addon"><i class="fa fa-globe"></i></div>
+                    <input class="form-control no-message" required required name="zip" ng-model='payment.zip' ng-maxlength="5" type="number" placeholder="Zip">
+                </div>
+                <div class="form-group input-group input-group-lg" validate no-msg>
+                    <div class="input-group-addon"><i class="fa fa-at"></i></div>
+                    <input class="form-control no-message" required name="email" ng-model='payment.email' type="email" placeholder="Email">
+                </div>
+                <div id="totalField">
+                    <label>Total:</label> <span>{{payment.amount| currency}}</span>
+                </div>
+        </form>
+    </section>
+    <footer>
+        <button class="btn btn-primary btn-lg" ng-click="submit()">Done</button>
+    </footer>
+</div>

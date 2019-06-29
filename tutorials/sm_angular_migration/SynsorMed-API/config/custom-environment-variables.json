@@ -1,0 +1,42 @@
+{
+  "db": {
+    "uri": "AWS_RDS_URL"
+  },
+  "logging":{
+     "logging_token": "LOGGING_TOKEN"
+  },
+  "newrelic": {
+     "level": "NEW_RELIC_LOG_LEVEL",
+     "license_key": "NEW_RELIC_LICENSE_KEY",
+     "app_name": "NEW_RELIC_APP_NAME"
+  },
+  "stripe": {
+    "key": "STRIPE_KEY"
+  },
+  "weemo": {
+    "auth_url": "WEEMO_AUTH_URL",
+    "client_id": "WEEMO_CLIENT_ID",
+    "client_secret": "WEEMO_CLIENT_SECRET",
+    "client_pass": "WEEMO_CLIENTP12PASS"
+  },
+  "server": {
+    "ip": "IP",
+    "port": "PORT"
+  },
+  "session": {
+    "secret": "SESSION_SECRET"
+  },
+  "plivo":{
+    "authId": "PLIVO_AUTH_ID",
+    "authToken": "PLIVO_AUTH_TOKEN"
+  },
+  "qb": {
+      "appId": "QUICK_BLOX_APP_ID",
+      "authKey": "QUICK_BLOX_AUTH_KEY",
+      "authSecret": "QUICK_BLOX_AUTH_SECRET"
+  },
+  "org":{
+    "id": "ORGANIZATION_ID"
+  }
+
+}

@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "cordova": "5.*",
+    "shelljs": "^0.5.1"
+  },
+  "devDependencies": {
+    "grunt-devserver": "*",
+    "express": "4.x",
+    "body-parser": "~1.0.0"
+  },
+  "cordova": {
+    "plugins": {
+     "cordova-plugin-health": {
+        "HEALTH_READ_PERMISSION": "App needs read access",
+        "HEALTH_WRITE_PERMISSION": "App needs write access"
+      }
+    }
+  }
+}

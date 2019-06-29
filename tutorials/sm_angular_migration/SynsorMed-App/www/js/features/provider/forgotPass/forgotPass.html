@@ -1,0 +1,19 @@
+<div id="forgot-pass">
+    <header>
+        <button ng-click="back()" class="back-button"></button>
+    </header>
+
+    <section>
+        <h1>Forgot Password?</h1>
+
+        <p>Enter the email address you used for your account and we will send you instructions on how to reset your password.</p>
+        <form name="form">
+            <div class="form-group" validate>
+                <input class="form-control" type="email" required name="email" ng-model="user.email" placeholder="Email">
+            </div>
+        </form>
+        <button ng-click='submit()' class="btn btn-primary btn-lg">Request Password</button>
+
+    </section>
+
+</div>

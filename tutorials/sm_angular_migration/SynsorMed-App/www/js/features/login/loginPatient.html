@@ -1,0 +1,54 @@
+<div id="login-box" class="patient">
+
+    <synsormed-header></synsormed-header>
+    <section id="login-form">
+        <form name="form">
+          <div class="logo">
+              <img src="img/synsormed_logo_name_small.png">
+          </div>
+          <div class="panel panel-default" ng-click="focusInput()">
+              <div class="panel-body">
+                  <div class="form-group" validate no-msg="true">
+                      <h2>Enter code</h2>
+                          <div class="input-group input-group-lg">
+                              <div class="input-group-addon"><i class="fa fa-2x fa-lock"></i></div>
+                              <input required maxlength="7" class="form-control uppercase" name="code" type="text" ng-model="code" placeholder="XXXXXX" typeahead="loggedInCode for loggedInCode in loggedInCodes | filter:$viewValue:stateComparator" ng-click="onFocus($event)" empty-typeahead>
+                          </div>
+                  </div>
+              </div>
+          </div>
+        </form>
+        <alert type="success" ng-if="connectedService && canShare" class="text-center" >You are sharing {{connectedService}} Sensor data.</alert>
+        <div class="action-buttons">
+            <div class="row">
+              <button class="buttonlg" ng-click="showSensorPopup()" ng-hide="true"><i class="fa fa-compass"></i><span>Share sensor data</span></button>
+              <button class="buttonlg" ng-click="submitForm()"><i class="fa fa-arrow-right"></i><span>Next</span></button>
+            </div>
+            <div class="row">
+                <!-- <div class="col-md-2 col-xs-3 col-md-offset-3 col-xs-offset-1 col-sm-2 col-sm-offset-2 col-lg-2 col-lg-offset-3">
+                    <label>
+                        <h3 class="dis-in">Save</h3>
+                        <input type="checkbox" name="save" ng-model="checked" style="width: 30px;height: 30px;margin-left: 10px;">
+                    </label>
+                </div> -->
+                <div class="">
+                    <label class="rememberMeArea text-right">
+                        <h3 class="dis-in">Save</h3>
+                        <input type="checkbox" data-onstyle="success" data-style="rememberMe" toggle-btn name="rememberMe" check="rememberMe">
+                    </label>
+                </div>
+            </div>
+            <br />
+<!--             <div id="how-it-works">
+              <a ng-click="showTutorial()">How it works</a>
+            </div> -->
+            <div id="about">
+              <a ng-click="showAbout()">About</a>
+            </div>
+            <div id="needHelp">
+              <a ng-click="needHelp()">Need Help?</a>
+            </div>
+        </div>
+
+    </section>
+</div>

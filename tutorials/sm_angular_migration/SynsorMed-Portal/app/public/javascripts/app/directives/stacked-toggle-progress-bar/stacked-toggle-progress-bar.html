@@ -1,0 +1,32 @@
+<div id="stacked-progress-toggle-box">
+  <div id="toggle-switch-wrapper">
+    <div class="switch-box">
+      <div id="overview" class="clearfix info-box">
+        <div class="text-center pull-left" style="width:50%;">
+          <p>
+            <span><b>Total Monitors: </b></span>
+            <span>{{total}}</span>
+          </p>
+        </div>
+        <div class="text-center pull-left" style="width:50%;">
+          <p>
+            <span><b>For: </b></span>
+            <span>{{doc.name}}</span>
+          </p>
+        </div>
+      </div>
+      <div id="details" class="clearfix info-box">
+        <div ng-repeat="obj in data" class="text-center pull-left" style="width:{{100/data.length}}%;">
+          <p>
+            <i class="fa fa-square fa-2" style="color: {{obj.color}}"></i>
+            <span><b>{{obj.title}}: </b></span>
+            <span>{{obj.percent}}%</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="stackedProgressBar" class="progress stacked-progress">
+    <div ng-repeat="obj in data" class="progress-bar" role="progressbar" style="width:{{obj.percent}}%; background-color: {{obj.color}}" title="{{obj.title}}"></div>
+  </div>
+</div>

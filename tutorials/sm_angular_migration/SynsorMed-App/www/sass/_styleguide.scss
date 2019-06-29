@@ -1,0 +1,273 @@
+$brand-primary: #00ABA2;
+$brand-primary-inverse: #F1F1F1;
+$brand-primary-text-inverse: #F1F1F1;
+$brand-primary-text:  #00ABA2;
+$brand-secondary: #8B8B8B;
+$brand-secondary-text: #8B8B8B;
+
+$secondary-color : #F05F3A;
+
+@import "compass/css3";
+//@import "bootstrap-sass";
+@import "bootstrap-variables";
+@import "bootstrap";
+$fa-font-path: "../fonts";
+@import "fontawesome/font-awesome";
+@import "compass/css3/transition";
+
+@mixin flexbox {
+  display: -webkit-box !important;
+  display: -moz-box !important;
+  display: box !important;
+  display: -ms-flexbox !important;
+  display: -webkit-flex !important;
+  display: flexbox !important;
+  display: flex !important;
+}
+
+@mixin flex($count: 1) {
+  -webkit-box-flex: $count;
+  -moz-box-flex:  $count;
+  box-flex: $count;
+  -webkit-flex:  $count;
+  -ms-flex:  $count;
+  flex:  $count;
+}
+
+@mixin vbox {
+  @include flexbox;
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+
+@mixin hbox {
+  @include flexbox;
+  -webkit-box-orient: horizontal;
+  box-orient: horizontal;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+}
+.textwarning
+{
+  color: $brand-warning;
+}
+.textdanger
+{
+  color: $brand-danger;
+}
+.vbox {
+  @include vbox();
+}
+.hbox {
+  @include hbox();
+}
+
+@include font-face("VAGRoundedStd", font-files("VAGRoundedStd-Light.otf"));
+
+html {
+  height: 100%;
+  width: 100%;
+  @include vbox();
+}
+body {
+  font-family: "VAGRoundedStd";
+  background-image: url("../img/synsormed-bg.jpg");
+  background-position: bottom center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  @include flex();
+  @include vbox();
+  > .alert {
+    font-size: $font-size-large;
+    text-align: center;
+    -webkit-transition:all linear 0.2s;
+    transition:all linear 0.2s;
+    opacity: 1;
+    max-height: 125px;
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    right: 0;
+    left: 0;
+    overflow: hidden;
+    button {
+      border: 1px solid;
+      padding: 0.25em;
+      > span:first-child {
+
+      }
+    }
+    &.ng-leave-active, &.ng-enter {
+      opacity: 0;
+      height: 0px;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      max-height: 0;
+    }
+  }
+}
+
+.absolute-fit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#pageContainer {
+
+  @include vbox;
+  @include flex;
+  color: $brand-secondary-text;
+  > div {
+    @include vbox;
+    @include flex;
+    > section {
+      @include flex;
+      overflow-y: scroll;
+      padding: 1em;
+    }
+    header {
+      @extend .clearfix;
+      background-color: $brand-primary;
+      color: $brand-primary-text-inverse;
+      @include box-shadow(rgba(0, 0, 0, .4) 0 4px 10px);
+      z-index: 2;
+      > h1 {
+        text-align: center;
+        color: $brand-primary-text-inverse;
+
+      }
+    }
+  }
+}
+
+h1 {
+  color: $brand-primary-text;
+}
+h2 {
+  color: $brand-primary-text;
+}
+h3,h4,h5,h6 {
+  color: $brand-secondary-text;
+}
+
+h1,h2,h3,h4 {
+  text-align: center;
+}
+
+.alert {
+  h4 {
+    i {
+      margin-right: .5em;
+    }
+  }
+}
+
+
+.dirty.has-error {
+  color: $brand-danger;
+
+  &.form-group .form-control {
+    border-color: transparent;
+    -webkit-box-shadow: 0 0px 8px #{rgba($brand-danger, 0.5)};
+    box-shadow: 0 0px 8px #{rgba($brand-danger, 0.5)};
+  }
+  input, select {
+    &::-webkit-input-placeholder { /* WebKit browsers */
+      color:    $brand-danger;
+    }
+    &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+      color:    $brand-danger;
+    }
+    &::-moz-placeholder { /* Mozilla Firefox 19+ */
+      color:    $brand-danger;
+    }
+    &:-ms-input-placeholder { /* Internet Explorer 10+ */
+      color:    $brand-danger;
+    }
+  }
+  &:after {
+    content: $fa-var-exclamation-circle;
+    color: $brand-danger;
+  }
+}
+
+.dirty {
+  &:after {
+    @extend .fa, .fa-2x;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    z-index: 3;
+  }
+}
+
+.dirty.has-success {
+  .form-control {
+    -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.075);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.075);
+    border-color: transparent;
+  }
+  &:after {
+    content: $fa-var-check-circle;
+    color: $brand-success;
+  }
+}
+
+.form-group {
+  position: relative;
+}
+
+.input-group {
+  .form-control {
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+  }
+}
+
+.no-message {
+  + small {
+    display: none;
+  }
+}
+
+.form-control, .input-group {
+  &[type=text], &[type=password], &[type=email], &[type=date], &[type=select], &[type=number] {
+    -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.075);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.075);
+    border-color: transparent;
+    &:focus {
+      border-color: transparent;
+      -webkit-box-shadow: 0 0px 8px #{rgba($brand-primary, 0.5)};
+      box-shadow: 0 0px 8px #{rgba($brand-primary, 0.5)};
+    }
+  }
+}
+
+.error-container {
+	color: $brand-danger;
+
+}
+
+.flex {
+  @include flex();
+}
+
+.vbox {
+  @include vbox();
+}
+
+.input-group-addon {
+  background-color: white !important;
+  border:transparent !important;
+}
+
+.highest-z-index{
+    z-index: 99999 !important;
+}

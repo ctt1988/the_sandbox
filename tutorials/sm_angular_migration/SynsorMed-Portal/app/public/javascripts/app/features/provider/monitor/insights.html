@@ -1,0 +1,145 @@
+<div id="admin-insights">
+
+  <!-- Nav tabs -->
+  <!-- Top nav starts  -->
+  <nav class="navbar synsormed-navs navbar-inverse" role="tabs">
+      <div class="container">
+        <!-- Nav brand start -->
+        <div class="navbar-header col-md-2">
+          <button type="button" class="navbar-toggle" data-toggle="collapse"
+           data-target="#collspse-insight-target">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+          </button>
+           <a class="navbar-brand" ><strong>Insights</strong></a>
+        </div>
+        <!-- Nav brand ends-->
+
+        <!-- Nav menu start-->
+        <ul role="tablist" id="collspse-insight-target" class="nav navbar-nav collapse navbar-collapse col-md-10">
+          <li role="presentation" ng-if="user.role == 'SuperAdmin'" class="active"><a href="#dashboard" aria-controls="dashboard" role="tab" data-toggle="tab">Global</a></li>
+          <li role="presentation" ng-if="user.role == 'SuperAdmin'" ng-click="loadAdminUsers()"><a href="#adminlist" aria-controls="adminlist" role="tab" data-toggle="tab">Admins</a></li>
+          <li role="presentation" ng-if="user.role == 'SuperAdmin'" ng-click="loadOrganizations()"><a href="#organization" aria-controls="organization" role="tab" data-toggle="tab">Organizations</a></li>
+        </ul>
+        <!-- Nav menu ends -->
+
+      </div>
+  </nav>
+
+ <!-- Tab panes -->
+   <div class="tab-content">
+
+     <div role="tabpanel" class="tab-pane active" ng-if="user.role == 'SuperAdmin'" id="dashboard" ng-controller="AdminInsightsDashboardController">
+        <div class="header">
+          <div class="container">
+            <div class="col-md-10 col-xs-6 text-left"><h3>Global Insights</h3></div>
+            <div class="col-md-2 col-xs-6 text-right form-group">
+               <button class="btn btn-primary btn-sm" ng-click="getGlobalStatistics()"><strong>REFRESH</strong></button>
+            </div>
+          </div>
+        </div>
+         <alert class="no-list container" ng-if="!insights" type="warning">
+           No Insights Available
+         </alert>
+
+         <div class="container no-list">
+         <ul ng-if="insights" class="list-group">
+           <li class="list-group-item">
+             <span class="badge">{{insights.organizations}}</span>
+             Organizations
+           </li>
+           <li class="list-group-item">
+             <span class="badge">{{insights.users}}</span>
+             Users
+           </li>
+           <li class="list-group-item">
+             <span class="badge">{{insights.providers}}</span>
+             Doctors
+           </li>
+           <li class="list-group-item">
+             <span class="badge">{{insights.admins}}</span>
+             Admins
+           </li>
+           <li class="list-group-item">
+             <span class="badge">{{insights.superAdmins}}</span>
+             Super Admins
+           </li>
+         </ul>
+       </div>
+     </div>
+
+     <div role="tabpanel" class="tab-pane" ng-if="user.role == 'SuperAdmin'" id="adminlist" ng-controller="AdminInsightsAdminlistController">
+       <div class="header">
+          <div class="container">
+            <div class="col-md-10 col-xs-6 text-left"><h3>Admins</h3></div>
+            <div class="col-md-2 col-xs-6 text-right form-group">
+               <button class="btn btn-primary btn-sm" ng-click="getAdminUsers()"><strong>REFRESH</strong></button>
+            </div>
+          </div>
+        </div>
+        <div ng-if="admins" class="synsormed-list-table">
+          <div class="list-head-row">
+            <div class="container">
+              <div class="col-xs-3"><strong>Name</strong></div>
+              <div class="col-xs-3"><strong>Email</strong></div>
+              <div class="col-xs-3"><strong>Organization</strong></div>
+              <div class="col-xs-3"><strong>Actions</strong></div>
+            </div>
+          </div>
+          <div class="list-head-row hover-grid" ng-repeat="admin in admins | orderBy:'-org_id'">
+            <div class="container">
+              <div class="col-xs-3">{{admin.name}}</div>
+              <div class="col-xs-3">{{admin.email}}</div>
+              <div class="col-xs-3">{{getOrganizationById(admin.org_id).name}}</div>
+              <div class="col-xs-3">
+                  <button class="btn btn-secondary fa fa-sign-in" ng-click="loginAsAdmin(admin)" title="Login">
+                  </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+         <alert type="warning" class="container no-list" ng-if="admins.length == 0">No Admins Loaded.</alert>
+
+     </div>
+
+     <div role="tabpanel" class="tab-pane" ng-if="user.role == 'SuperAdmin'" id="organization" ng-controller="AdminInsightsOrganizationController">
+       <div class="header">
+          <div class="container">
+            <div class="col-md-10 col-xs-6 text-left"><h3>Organizations</h3></div>
+            <div class="col-md-2 col-xs-6 text-right form-group">
+                <a class="btn btn-primary btn-sm" href="#/register"><strong>ADD</strong></a>
+               <button class="btn btn-primary btn-sm" ng-click="getAllOrganizations()"><strong>REFRESH</strong></button>
+            </div>
+          </div>
+        </div>
+
+        <div ng-if="orgs" class="synsormed-list-table">
+          <div class="list-head-row">
+            <div class="container">
+              <div class="col-xs-4"><strong>Name</strong></div>
+              <div class="col-xs-4 text-center"><strong>Active</strong></div>
+              <div class="col-xs-4 text-center"><strong>Actions</strong></div>
+            </div>
+          </div>
+          <div class="list-head-row hover-grid" ng-repeat="org in orgs">
+            <div class="container">
+              <div class="col-xs-4">{{org.name}}</div>
+              <div ng-show='org.is_active' class="col-xs-4 text-center"><span class='fa fa-lg fa-check-circle text-success'></span></div>
+              <div ng-show='!org.is_active' class="col-xs-4 text-center"><span class='fa fa-lg fa fa-times-circle text-danger'></span></div>
+              <div class="col-xs-4 text-center">
+                   <button class="btn btn-secondary" ng-click="getDetails(org)"><i class="fa fa-bar-chart"></i></button>
+                   <button class="btn btn-secondary" ng-click="license(org)">Add License</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+         <alert type="warning" class="container no-list" ng-if="orgs.length == 0">No Organizations Loaded.</alert>
+
+     </div>
+
+  </div>
+</div>

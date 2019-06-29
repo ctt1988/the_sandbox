@@ -1,0 +1,41 @@
+<div  id="video-chat-container" modaldraggable>
+    <div ng-show="!callStarted" id="calling-phy">
+        <div class="text-center phy-call-area">
+                <h3>Physician is Calling ...</h3>
+                <button class="btn btn-success" title="Answer" ng-click="acceptCall()">
+                    Accept
+                </button>
+                <button class="btn btn-danger" title="Reject" ng-click="rejectCall()">
+                    Reject
+                </button>
+        </div>
+    </div>
+    <div class="modal-body" ng-show="callStarted">
+        <div class="remote-video-wrap">
+            <video id="remoteVideo" ng-class="showBackground ? 'video-background' : ''" class="video-style" poster="/images/synsormed_logo_color.png"></video>
+            <div class="local-timer-wrap" ng-if="duration">
+                <alert class="text-center" type="info">{{duration | timerFormat}}</alert>
+            </div>
+            <div class="local-video-wrap">
+                <video id="localVideo" autoplay="true" muted="muted" ng-class="showBackground ? 'video-background' : ''" class="video-style" poster="/images/synsormed_logo_color.png"></video>
+            </div>
+        </div>
+        <div class="top-margin-10 text-center">
+            <button class="btn btn-danger" ng-click="endCall()" title="End Call">
+                <i class="fa fa-phone fa-lg" aria-hidden="true"></i>
+            </button>
+            <button ng-if="controls.audio" class="btn btn-success" title="Mute Audio" ng-click="toggleType('audio')">
+                <i class="fa fa-microphone" aria-hidden="true"></i>
+            </button>
+            <button ng-if="!controls.audio" class="btn btn-danger" title="Unmute Audio" ng-click="toggleType('audio')">
+                <i class="fa fa-microphone-slash" aria-hidden="true"></i>
+            </button>
+            <button ng-if="controls.video" class="btn btn-success" title="Hide Video" ng-click="toggleType('video')">
+                <i class="fa fa-video-camera" aria-hidden="true"></i>
+            </button>
+            <button ng-if="!controls.video" class="btn btn-danger" title="Show Video" ng-click="toggleType('video')">
+                <i class="fa fa-video-camera" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+</div>

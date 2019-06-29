@@ -1,0 +1,19 @@
+<div id="appData">
+  <div class="modal-header service-header">
+      <h3 class="modal-title font-col">
+        Select a Device
+      </h3>
+  </div>
+  <div class="modal-body service-body">
+    <ul ng-if="services">
+      <li ng-repeat="service in services" ng-click="selectedService(service)">
+          <h3 class="font-col" ng-if="service.displayName.toLowerCase() != 'c5'"><u>{{ service.displayName }}</u></h3>
+          <h3 class="font-col" ng-if="service.displayName.toLowerCase() == 'c5'"><u>Companion 5</u></h3>
+      </li>
+    </ul>
+    <h3 class="font-col">{{notLinkedService}}</h3>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-warning" ng-click="ok()">Close</button>
+  </div>
+</div>

@@ -1,0 +1,198 @@
+#worklist {
+  > header {
+    h1 {
+      text-align: left;
+      margin-left: 1em;
+    }
+    a {
+      float: right;
+      margin-top: 1.8em;
+      margin-right: 1em;
+      @extend .btn, .btn-default, .btn-sm;
+    }
+  }
+  section {
+    position: relative;
+    width: 100%;
+    @include vbox();
+  }
+ .round-button-circle {
+     width: 62%;
+     background-color: #00ABA2;
+     height: 0;
+     border-radius: 50%;
+     border: 27px solid #00ABA2;
+     box-shadow: 0 0 3px gray;
+}
+.position-right{
+    position: fixed;
+    display: block;
+    right: 5%;
+    bottom: 10%;
+    z-index: 2;
+}
+.round-button-circle i {
+    width: 22%;
+    position: relative;
+    top: 9px;
+    left: -3.5px;
+    font-size: 32px;
+}
+.white{
+    color: #fff;
+}
+  #instructions {
+    @include hbox;
+    background-color: white;
+    @include box-shadow(rgba(0, 0, 0, .4) 0 4px 10px);
+    z-index: 1;
+    >span {
+      display: block;
+      @include flex;
+      line-height: $line-height-base;
+      padding-top: $padding-base-vertical + 1px;
+      padding-bottom: $padding-base-vertical;
+      padding-left: 1em;
+    }
+    .btn-group.open .dropdown-toggle {
+      box-shadow: none;
+      z-index: 1;
+    }
+    .btn-group {
+      button {
+        &:focus, &:active {
+          box-shadow: none;
+          z-index: 1;
+        }
+        background-color: white;
+      }
+    }
+    .dropdown-menu {
+      left: auto;
+      right: 0;
+    }
+  }
+
+  #waiting-list {
+    padding: 0;
+    > li {
+
+      display: block;
+      margin-bottom: 1em;
+      padding-bottom: 1em;
+      background-color: white;
+      @include hbox;
+      .details {
+        @extend .col-xs-5;
+      }
+      .actions {
+        @extend .col-xs-5;
+        a {
+          width: 100%;
+          display: block;
+          margin-top: 2em;
+        }
+      }
+      .call {
+
+        position: relative;
+        button {
+          @extend .absolute-fit;
+          @extend .btn, .btn-success;
+          i {
+            @extend  .fa, .fa-video-camera, .fa-2x;
+          }
+          width: 100%;
+        }
+        @include flex;
+        float: left;
+      }
+      ul {
+        padding: 0;
+        li {
+          list-style: none;
+        }
+      }
+    }
+  }
+  #call-statuses {
+
+    ul {
+      list-style: none;
+      padding-left: 0px;
+
+      li {
+        font-size: $font-size-h3;
+      }
+    }
+  }
+  #reload-status {
+    opacity: 0;
+    position: absolute;
+    transition-duration: 1000ms;
+    z-index: -1;
+    font-size: $font-size-large;
+    text-align: center;
+
+  }
+  #reloader-container {
+    position: relative;
+    @include vbox();
+    @include flex();
+  }
+  #reloader {
+    max-height: 100%;
+    width: 100%;
+    position: absolute;
+    &.pulling {
+      #reload-status {
+        opacity: 1;
+      }
+    }
+    > div {
+      width: 100%;
+      position: absolute;
+      -webkit-transform: translateZ(0);
+      -moz-transform: translateZ(0);
+      -ms-transform: translateZ(0);
+      -o-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+  }
+  .alert p {
+    text-align: center;
+  }
+}
+
+//#patientList {
+//    li.row {
+//        padding-top: 1em;
+//        padding-bottom: 1em;
+//    }
+//    #waitingList {
+//        .callButton {
+//            @extend .button, .button-balanced, .col, .col-25, .icon, .ion-ios7-telephone-outline;
+//            &:before {
+//                padding-right: .2em;
+//            }
+//        }
+//        > li:nth-child(2n+1) {
+//            background-color: lighten($balanced, 45%);
+//        }
+//    }
+//    h4 {
+//        margin: 2em;
+//        text-align: center;
+//    }
+//    #call_statuses {
+//	li {
+//            margin-top: 3em;
+//            font-size: 1.5em;
+//            text-align: center;
+//            list-style: none;
+//            button {
+//                margin-top: 1em;
+//            }
+//	}
+//    }
+//}

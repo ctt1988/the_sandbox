@@ -1,0 +1,27 @@
+.synsormed-side-menu{
+  background-color : $secondary-color;
+  z-index:1061 !important;
+  width: 80%;
+  height:100%;
+  .menu-icon-item{
+    margin : 8px 20px;
+    color: #ffffff;
+  }
+  .synsormed-menu-item{
+    color:#ffffff;
+    font-size: 20px;
+    height:80px;
+    border-bottom : 1px solid #444444;
+    .icon-element {
+      font-size: 35px;
+    }
+  }
+}
+.synsormed-menu-trigger{
+  color : #FFFFFF !important;
+  font-size:28px;
+}
+.synsormed-menu-cloak{
+  width:20%;
+  height:100%;
+}

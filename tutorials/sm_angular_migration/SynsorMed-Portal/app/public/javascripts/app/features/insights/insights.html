@@ -1,0 +1,264 @@
+<div id="insights">
+
+  <!-- Nav tabs -->
+  <!-- Top nav starts  -->
+  <nav class="navbar synsormed-navs navbar-inverse" role="tabs">
+      <div class="container">
+        <!-- Nav brand start -->
+        <div class="navbar-header col-md-2">
+          <button type="button" class="navbar-toggle" data-toggle="collapse"
+           data-target="#collspse-insight-target">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+          </button>
+           <a class="navbar-brand" ><strong>Insights</strong></a>
+        </div>
+        <!-- Nav brand ends-->
+
+        <!-- Nav menu start-->
+        <ul role="tablist" id="collspse-insight-target" class="nav navbar-nav collapse navbar-collapse col-md-10">
+          <li role="presentation" ng-if="user.role == 'Admin'" class="active"><a href="#dashboard" aria-controls="dashboard" role="tab" data-toggle="tab">Dashboard</a></li>
+          <li role="presentation" ng-if="user.role == 'Admin'"><a href="#graphs" ng-click="loadChart()" aria-controls="graphs" role="tab" data-toggle="tab">Deep Insights</a></li>
+          <li role="presentation" ng-if="user.role == 'Admin'"><a href="#doctors" aria-controls="doctors" role="tab" data-toggle="tab">Doctors</a></li>
+          <li role="presentation" ng-if="user.role == 'Admin'"><a href="#ccm" ng-click="loadCCM()" aria-controls="ccm" role="tab" data-toggle="tab">CCM</a></li>
+          <li role="presentation" ng-if="user.role == 'Admin'"><a href="#survey" ng-click="loadSurveyChart()" aria-controls="survey" role="tab" data-toggle="tab">Survey</a></li>
+          <li role="presentation" ng-if="user.role == 'Admin'"><a href="#leaderboard" ng-click="loadLeaderboard()" aria-controls="leaderboard" role="tab" data-toggle="tab">Leaderboard</a></li>
+        </ul>
+        <!-- Nav menu ends -->
+
+        <div class="alert alert-danger col-md-offset-1 col-md-3" ng-if="licenseMsg" style="padding:8px;margin:10px 0px;float:right;">
+          <strong style="padding-left: 35px;">{{licenseMsg}}</strong>
+        </div>
+
+      </div>
+  </nav>
+
+ <!-- Tab panes -->
+ <div class="tab-content">
+
+   <div role="tabpanel" class="tab-pane active" ng-if="user.role == 'Admin'" ng-init="loadPracticeInsights(user.org_id)" id="dashboard" ng-controller="InsightsDashboardController">
+        <div class="header">
+           <div class="container">
+             <div class="col-md-10 col-xs-6 text-left"><h3>Dashboard</h3></div>
+             <div class="col-md-2 col-xs-6 text-right form-group">
+                <button class="btn btn-primary btn-sm" ng-click="loadPracticeInsights(user.org_id)"><strong>REFRESH</strong></button>
+             </div>
+           </div>
+         </div>
+          <alert class="no-list container" ng-if="!insights" type="warning">
+            No Insights Available
+          </alert>
+
+          <div class="container no-list">
+          <ul ng-if="insights" class="list-group">
+            <li class="list-group-item">
+              <span class="badge">{{insights.providers}}</span>
+              All Doctors
+            </li>
+            <li class="list-group-item">
+              <span class="badge">{{insights.patients}}</span>
+              All Patients
+            </li>
+            <li class="list-group-item">
+              <span class="badge">{{insights.patients7days}}</span>
+              All Patients (Last 7 days)
+            </li>
+            <li ng-if="insights.longestSession" class="list-group-item">
+              <span class="badge">{{insights.longestSession}}</span>
+              Most Called Doctor (All Times)
+            </li>
+            <li ng-if="insights.longestSession7days" class="list-group-item">
+              <span class="badge">{{insights.longestSession7days}}</span>
+              Most Called Doctor (Last 7 days)
+            </li>
+            <li ng-if="insights.lowestSession" class="list-group-item">
+              <span class="badge">{{insights.lowestSession}}</span>
+              Least Called Doctor (All Times)
+            </li>
+            <li ng-if="insights.lowestSession7days" class="list-group-item">
+              <span class="badge">{{insights.lowestSession7days}}</span>
+              Least Called Doctor (Last 7 days)
+            </li>
+            <li ng-if="insights.monitorStatus" class="list-group-item">
+              <span class="badge">{{insights.monitorStatus.monitors}}</span>
+              All Monitors
+            </li>
+            <li ng-if="insights.monitorStatus" class="list-group-item">
+              <span class="badge">{{insights.monitorStatus.connectedMonitorRatio*100}} %</span>
+              Connected Monitor Percentage
+            </li>
+            <li ng-if="insights.monitorStatus" class="list-group-item">
+              <span class="badge">{{insights.monitorStatus.activeMonitors}}</span>
+              Active Monitors
+            </li>
+          </ul>
+        </div>
+   </div>
+
+   <div role="tabpanel" id="graphs" class="tab-pane" ng-if="user.role == 'Admin'" ng-controller="InsightsGraphController">
+     <div class="header">
+        <div class="container">
+          <div class="col-sm-7 col-md-8 col-lg-9 col-xs-12"><h3>Deep Insights (For Last {{days}} Days)</h3></div>
+          <div class="col-sm-5 col-md-4 col-lg-3 col-xs-12">
+            <div class="form-group col-xs-6">
+                <span>Days</span>
+                <aura-dropdown selected="days" items="[7,10,14]" class="pointer"></aura-dropdown>
+            </div>
+            <div class="form-group col-xs-6">
+              <button class="btn btn-primary btn-sm" ng-click="loadPracticeDeepInsights(user.org_id,days)"><strong>REFRESH</strong></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <highchart class="center-block col-md-12 text-center" config="chartConfig"></highchart>
+      </div>
+  </div>
+
+   <div role="tabpanel" id="doctors" class="tab-pane" ng-if="user.role == 'Admin'" ng-controller="InsightsUserController">
+
+    <div class="header">
+       <div class="container">
+         <div class="col-md-12 text-left"><h3>Doctors</h3></div>
+       </div>
+     </div>
+
+     <div ng-if="users" class="synsormed-list-table">
+       <div class="list-head-row">
+         <div class="container">
+           <div class="col-xs-8 col-sm-4"><strong>Name</strong></div>
+           <div class="col-xs-4 hidden-xs"><strong>Email</strong></div>
+           <div class="col-xs-4 col-sm-4 text-center"><strong>Actions</strong></div>
+         </div>
+       </div>
+       <div class="list-head-row hover-grid" ng-repeat="practiceUser in users">
+         <div class="container">
+           <div class="col-xs-8 col-sm-4">{{practiceUser.name}}</div>
+           <div class="col-xs-4 hidden-xs">{{practiceUser.email}}</div>
+           <div class="col-xs-4 col-sm-4 text-center">
+                <button class="btn btn-secondary" ng-click="getDetails(practiceUser)"><i class="fa fa-bar-chart"></i></button>
+           </div>
+         </div>
+       </div>
+     </div>
+
+      <alert type="warning" class="container no-list" ng-if="users.length == 0">There are no doctors registered with you.</alert>
+   </div>
+
+   <div role="tabpanel" id="ccm" class="tab-pane" ng-if="user.role == 'Admin'" ng-controller="InsightsCCMController">
+     <div class="header">
+       <div class="container">
+         <div class="col-sm-7 col-md-8 col-lg-9 col-xs-12"><h3>Chronic Care Management (For Last {{days}} Days)</h3></div>
+         <div class="col-sm-5 col-md-4 col-lg-3 col-xs-12">
+           <div class="form-group col-xs-6">
+               <span>Days</span>
+               <aura-dropdown selected="days" items="[7,15,30]" class="pointer"></aura-dropdown>
+           </div>
+           <div class="form-group col-xs-6">
+             <button class="btn btn-primary btn-sm" ng-click="getLogs(user.org_id,days)"><strong>REFRESH</strong></button>
+           </div>
+         </div>
+       </div>
+      </div>
+
+      <div ng-if="logs" class="synsormed-list-table">
+        <div class="list-head-row">
+          <div class="container">
+            <div class="col-sm-2 col-xs-3"><strong>Code</strong></div>
+            <div class="col-sm-2 col-xs-4 text-center"><strong>Doctor</strong></div>
+            <div class="col-sm-3 col-xs-3 text-center"><strong>Date</strong></div>
+            <div class="col-sm-3 col-xs-3 hidden-xs text-center"><strong>Duration</strong></div>
+            <div class="col-sm-2 col-xs-2 text-center"><strong>CCM Qualify</strong></div>
+          </div>
+        </div>
+        <div threshold safe-level="safeLevel" current-level="log.duration" class="list-head-row hover-grid" ng-repeat="log in logs">
+          <div class="container">
+            <div class="col-sm-2 col-xs-3">{{log.code}}</div>
+            <div class="col-sm-2 col-xs-4 text-center">{{log.name}}</div>
+            <div class="col-sm-3 col-xs-3 text-center">{{log.date | date:'medium' }}</div>
+            <div class="col-sm-3 col-xs-3 hidden-xs text-center">{{log.duration | secondsToHoursString}}</div>
+            <div class="col-sm-2 col-xs-2 text-center">
+              <span ng-if="safeLevel <= log.duration" class="fa fa-lg fa-check-circle text-success"></span>
+              <span ng-if="safeLevel > log.duration" class="fa fa-lg fa-times-circle text-danger"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <alert type="warning" class="container no-list"  ng-if="!logs || logs.length == 0" type="info">No CCM Logs Available</alert>
+
+   </div>
+
+   <div role="tabpanel" id="survey" class="tab-pane" ng-if="user.role == 'Admin'" ng-controller="InsightsSurveyGraphController">
+     <div class="header">
+        <div class="container">
+          <div class="col-md-10 text-left col-xs-9"><h3>Survey Responses</h3></div>
+          <div class="col-md-2 text-right col-xs-3">
+            <div class="form-group">
+              <button class="btn btn-primary btn-sm" ng-click="loadPracticeSurveyResponse(user.org_id)"><strong>REFRESH</strong></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <highchart class="center-block col-md-12 text-center" config="chartConfig"></highchart>
+      </div>
+  </div>
+
+  <div role="tabpanel" id="leaderboard" class="tab-pane" ng-if="user.role == 'Admin'" ng-controller="InsightsLeaderboardController">
+    <div class="header">
+        <div class="container">
+            <div class="col-md-2 text-left"><h3>Leaderboard</h3></div>
+            <div class="col-md-6 text-left form-group">
+               <div ng-if="dataKeys.length" class="col-md-8 col-sm-7 col-lg-6 col-xs-12 xs-visible-block clearfix xs-mar-top-10 pad-0">
+                   <span class="hidden-xs hidden-sm small-text">Leaderboard for</span>
+                   <aura-dropdown class='xs-fl pointer' selected="selected.name" items="dataKeys" key="name" item="name"></aura-dropdown>
+               </div>
+                <div class="col-md-4 col-sm-5 col-lg-6 col-xs-12 xs-visible-block clearfix xs-mar-top-10 pad-0">
+                    <span class="small-text">Records</span>
+                    <aura-dropdown selected="pagination.pageSize" items="pagination.pageSizes" class="pointer"></aura-dropdown>
+                 </div>
+            </div>
+            <div class="col-md-3 form-group"></div>
+            <div class="col-md-1 col-xs-6 text-right form-group">
+                <button class="btn btn-primary btn-sm" ng-click="getLeaderboardInsights(user.org_id)"><strong>REFRESH</strong></button>
+            </div>
+        </div>
+       <div class="container">
+           <table class="table table-striped " ng-if="currentData.length">
+               <thead>
+                   <tr>
+                       <th class="text-center">Sr. No</th>
+                       <th class="text-center">Code</th>
+                       <th class="text-center">Patient</th>
+                       <th class="text-center">Points</th>
+                   </tr>
+               </thead>
+               <tbody class="text-center">
+                   <tr ng-repeat="data in currentData">
+                       <td>{{$index + 1}}</td>
+                       <th class="text-center" scope="row">{{data.patientCode}}</th>
+                       <td>{{data.patient | defaultText:'N/A'}}</td>
+                       <td>{{data.points}}</td>
+                   </tr>
+               </tbody>
+           </table>
+           <alert ng-if="!currentData.length" class="container no-list" type="warning">No Records</alert>
+       </div>
+       <!--Pagination-->
+       <div ng-if="currentData.length != 0" class="container text-center">
+           <ul class="pagination" ng-if="pageCount != 1">
+               <li><span ng-click="pageTurn(-1)"><i class="fa fa-arrow-left"></i> Previous</span></li>
+               <li ng-repeat="aPage in pages" ng-class="{active: pagination.page == aPage}"><span ng-click="pageTo(aPage)">{{aPage}}</span></li>
+               <li><span ng-click="pageTurn(1)">Next <i class="fa fa-arrow-right"></i></span></li>
+           </ul>
+       </div>
+       <div ng-if="currentData.length != 0" class="container"><small>Viewing page {{pagination.page}} of {{pageCount}}</small></div>
+       <!--Pagination-->
+     </div>
+ </div>
+
+</div>
+
+</div>

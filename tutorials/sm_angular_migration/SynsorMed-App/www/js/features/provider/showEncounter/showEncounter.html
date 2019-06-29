@@ -1,0 +1,27 @@
+<div id="showCode">
+    <synsormed-header title="Evisit Code" back-button="false" is-provider="true" logged-in="true"></synsormed-header>
+     <div class="header">
+         <div class="container">
+           <div class="text-center"><h3>Patient Code</h3></div>
+         </div>
+    </div>
+    <div class="container">
+        <div class="col-md-10 col-md-offset-1 code-wrap">
+            <div class="text-center"><h1><strong>{{encounter.patientCode}}</strong></h1></div>
+            <div>
+                <div class="col-md-6">
+                    <div class="reason-wrap">
+                        <strong>Reason For eVisit</strong>
+                        <ul>
+                            <li><p>{{encounter.reasonForVisit}}</p></li>
+                        </ul>
+                        <strong>eVisit Date</strong>
+                        <ul>
+                            <li>{{encounter.scheduledStartTime|date:'short'}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

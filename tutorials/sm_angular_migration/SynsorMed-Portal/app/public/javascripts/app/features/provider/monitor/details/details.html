@@ -1,0 +1,31 @@
+<div  class="modal-body" style="position: relative;" wait="waiting">
+    <div class="text-center">
+      <h3>Details</h3>
+    </div>
+    <div class="modal-body">
+        <div class="row" ng-repeat="result in results" style="border-top: 1px solid #e5e5e5;padding:10px 0px">
+            <div class="col-md-9" style="border-right: 1px solid #e5e5e5;">
+                <div >
+                    {{result.extra.question}}
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div ng-if="result.extra.options.length === 2 && result.extra.answer == 2" style="color: green">
+                    {{result.extra.answer}}
+                </div>
+                <div ng-if="result.extra.options.length === 2 && result.extra.answer == 4" style="color: red">
+                    {{result.extra.answer}}
+                </div>
+                <div ng-if="result.extra.options.length !== 2">
+                    {{result.extra.answer}}
+                </div>
+            </div>
+        </div>
+  </div>
+   <div class="modal-footer">
+     <div class="pull-right">
+        <button class="btn btn-primary" ng-click="close()">Close</button>
+     </div>
+     <div class="clear"></div>
+   </div>
+</div>

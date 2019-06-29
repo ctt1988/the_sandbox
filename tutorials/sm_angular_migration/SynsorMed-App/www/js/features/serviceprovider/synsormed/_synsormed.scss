@@ -1,0 +1,52 @@
+#synsorMedService{
+    #indicators{
+        .panel-heading{
+            height: 55px;
+            padding: 0px;
+        }
+
+        .panel-heading *{
+            height: 100%;
+            width: 100%;
+        }
+
+        .indicator-btn{
+            font-size: 18px;
+            padding: 15px 40px;
+        }
+
+        .pad0{
+            padding: 0px;
+        }
+
+    }
+}
+
+#logData{
+    .clear{
+        clear: both;
+    }
+    .time-width{
+        width: 45%;
+    }
+    .data-width{
+        width: 54%;
+    }
+    .padd33{
+        padding-top: 24px;
+    }
+    .logbtn{
+        width:80px !important;
+      }
+    .custom-date-picker, .custom-time-picker{
+        .form-control {
+            padding: 11px;
+        }
+        table{
+            width: 100%;
+        }
+       .btn {
+            padding: 1px 2px;
+        }
+    }
+}

@@ -1,0 +1,23 @@
+<div id="synsorMedService">
+    <synsormed-header title="SynsorMed Service" back-button="true" logged-in="true"></synsormed-header>
+    <section>
+        <div class="panel panel-default">
+            <div class="panel-body text-center" id="indicators">
+                <h2>Indicators</h2>
+                <div class="panel-group">
+                    <div ng-repeat="service in services" class="col-sm-12 alert alert-info indicator-list pad0 panel panel-default ng-isolate-scope">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <div class="text-center ng-scope" ng-click="openLogBar(service)">
+                                    <a class="btn col-sm-2 list-text indicator-btn">
+                                        <b class="ng-binding">{{service.name}}</b>
+                                    </a>
+                                </div>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

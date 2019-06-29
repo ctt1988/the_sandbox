@@ -1,0 +1,21 @@
+<div id="callContentArea">
+   <synsormed-header title="Waiting Room" back-button="false" logged-in="true"></synsormed-header>
+    <section wait="status == 'connecting'">
+        <alert id="connectionError" class="text-center" ng-if="!hasHighBandwidth && false">
+            <h4><i class="fa fa-remove"></i>Better connection needed</h4>
+            <p>Please connect your device to better connection in order to use <strong>Synsor</strong>Med.</p>
+        </alert>
+        <ul id="call-statuses">
+            <li ng-if="status == 'connecting'">Connecting...</li>
+            <li ng-if="status == 'waiting'">Waiting on physician.</li>
+            <li class="offline" ng-if="status == 'waiting' && !providerOnline">Physician is offline</li>
+            <li class="online" ng-if="status == 'waiting' && providerOnline">Physician is online</li>
+            <li ng-if="status == 'complete'">Call has been completed. You may exit the app.</li>
+            <li ng-if="status == 'active'">Call in progress.</li>
+            <li ng-if="status == 'ringing'">
+                <div>Physician is calling</div>
+                <button ng-click="pickUp()" class="btn btn-lg btn-success">Pick up</button>
+            </li>
+        </ul>
+    </section>
+</div>

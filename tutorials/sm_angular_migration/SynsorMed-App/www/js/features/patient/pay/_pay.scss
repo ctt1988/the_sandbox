@@ -1,0 +1,39 @@
+#pay {
+  i {
+    color: $brand-primary;
+  }
+  #expirationDate, #cvv {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  #expirationDate {
+    > * {
+      position: relative;
+      width: 46%;
+      display: inline-block;
+      &:first-child {
+        margin-right: 2%;
+      }
+    }
+  }
+  #totalField {
+    background-color: white;
+    label {
+      font-size: 18px;
+      margin-left: 2em;
+      margin-right: 0.5em;
+      position: relative;
+      top: -0.1em;
+    }
+    span {
+      font-size: $font-size-h2;
+      color: $brand-primary;
+    }
+  }
+  footer {
+    text-align: center;
+    button {
+      min-width: 10em;
+    }
+  }
+}

@@ -1,0 +1,74 @@
+<div id="worklist" ng-if="status != 'active'">
+  <synsormed-header title="Worklist" back-button="false" is-provider="true" logged-in="true"></synsormed-header>
+
+  <div id="instructions" class="hbox">
+    <span class="flex">Sort by</span>
+    <div class="btn-group" dropdown>
+      <button type="button" dropdown-toggle class="btn dropdown-toggle" ng-disabled="disabled">
+        {{sort.sortOrder.name}} <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="order in orderOptions"><a ng-click="sort.sortOrder = order">{{order.name}}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="container-fluid">
+
+    <div ng-if="status == 'connectingToWeemo'"><h3>Connecting to the video service...</h3></div>
+
+    <div id="call-statuses" ng-if="status != null">
+      <ul>
+        <li ng-if="status == 'connecting'">Connecting...</li>
+        <li ng-if="status == 'active'">Call in progress.</li>
+        <li ng-if="status == 'ringing'">
+          <div>Patient's device is now ringing.</div>
+          <button ng-click="disconnectCall();" class="btn btn-lg btn-warning">Hang up</button>
+        </li>
+      </ul>
+    </div>
+
+    <div id="reloader-container" class="vbox flex">
+      <div id="reloader" pull-to-refresh="reloadView">
+        <div>
+          <ul id="waiting-list" ng-if="!calling && status != 'connectingToWeemo'">
+            <li ng-repeat='patient in worklist'>
+              <div class="details">
+                <h3>{{patient.patientCode}}</h3>
+                <div>Reason for visit: {{patient.reasonForVisit}}</div>
+                <ul>
+                  <li><small>Appointment time: {{patient.scheduledStartTime|date:'short'}}</small></li>
+                  <li ng-if='!!patient.startedWaitingOn'><small>Waiting since: {{patient.last_activity|date:'short'}}</small></li>
+                </ul>
+
+              </div>
+              <div class="actions">
+
+                <a class="btn btn-default btn-sm" ng-href='#/provider/writeNote?patientId={{patient.id}}&patientCode={{patient.code}}'>Edit Notes</a>
+                <!--<a class="btn btn-default btn-sm" ng-href='#/provider/writeNote?patientId={{patient.id}}'>Delete</a>-->
+              </div>
+              <div class="call">
+                <button ng-if='patient.isWaiting' ng-click="call(patient)" class="callButton"><i></i></button>
+              </div>
+            </li>
+            <alert type="info" ng-if="worklist.length === 0">
+              <h4>There are no patients scheduled for today.</h4>
+              <p>Pull down to refresh.</p>
+            </alert>
+          </ul>
+        </div>
+        <div id="reload-status"><i class="fa fa-spin fa-refresh"></i> Release to refresh</div>
+      </div>
+    </div>
+    <div>
+        <span class='position-right'>
+            <a ng-href='#/provider/Create/Encounter' class="round-button-circle white" title="Create Encounter">
+                <i class="fa fa-4x fa-plus"></i>
+            </a>
+        </span>
+    </div>
+  </section>
+
+</div>
+
+<div id="dashboard" ng-if="status == 'active'" ng-include="'js/features/provider/dashboard/dashboard.html'"></div>

@@ -1,0 +1,54 @@
+{
+    "db": {
+      "uri": "mysql://root:root@localhost/test_dev"
+    },
+    "server": {
+        "baseUrl": "api-test-synsormed.herokuapp.com"
+    },
+    "newrelic": {
+      "enabled": true,
+      "level": "trace",
+      "app_name": "api-test-synsormed"
+    },
+    "cron_time_test": {
+      "cronEnabled": false,
+      "everyNight": {
+        "hour" : "14",
+        "minute": "29"
+      },
+      "everyMidnight": {
+        "hour" : "13",
+        "minute": "29"
+      },
+      "everyEvening": {
+        "hour" : "19",
+        "minute": "29"
+      },
+      "everyMorning": {
+        "hour" : "11",
+        "minute": "25"
+      },
+      "morningSync": {
+        "hour" : "15",
+        "minute": "29"
+      },
+      "eveningSync": {
+        "hour" : "19",
+        "minute": "1"
+      },
+      "afterParticularTime": {
+        "hour" : "19",
+        "minute": "1"
+      },
+      "onTuesday": {
+        "hour" : "18",
+        "minute": "30",
+        "dayOfWeek": "2"
+      },
+      "onFriday": {
+        "hour" : "18",
+        "minute": "30",
+        "dayOfWeek": "5"
+      }
+    }
+}
