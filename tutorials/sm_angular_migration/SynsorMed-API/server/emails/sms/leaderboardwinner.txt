@@ -1,2 +1,0 @@
-The patient code zzzCodezzz with description zzzDetailszzz is the winner for zzzMeasurementzzz
-leaderboard from zzzStartDatezzz to zzzEndDatezzz with zzzPointszzz points

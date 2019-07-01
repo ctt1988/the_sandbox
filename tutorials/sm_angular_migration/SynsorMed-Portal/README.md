@@ -1,4 +1,0 @@
-SynsorMed-Portal
-================
-
-Web Application
