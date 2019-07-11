@@ -1,21 +1,21 @@
-//snippet of code to calculate change from payment
-var makeChange = function(price, payment) {
-  console.log('running makeChange function');
-	//setting price=3.5 and payment=4 in this example
-  var changeLeft = Math.round(100*payment - 100*price);
-  //changeLeft is now 50
-  if (changeLeft < 0) {return [0,0,0,0]};
-  //changeLeft is > 0. this is dead code
-  var results = [], quantity;
-  //setting results as an empty array and quantity(quantity will be used later)
-  [25, 10, 5, 1].forEach(function(val){
-  	//
-    quantity = Math.floor(changeLeft/val);
-    changeLeft -= quantity * val;
-    results.push(quantity);
-  });
-  console.log(results);
-  return results;
-};
+//given the price and payment, determine how much change you should receive. Assume price and payment will always be positve numbers.
+function makeChange(price, payment){
+  //if the payment is higher than the price, subtract price from payment and that is your change
+  if (payment>price){
+    var change = payment - price;
+  }
+  //else if the payment is equal to the price, 0 is your change
+  else if(payment===price){
+    var change = 0;
+  }
+  //else, print payment is not suffcient
+  else {
+    var change = 'Insufficient payment';
+  }
+  console.log(change);
+}
 
-makeChange(3.5, 4);
+makeChange(4, 4);
+
+
+
